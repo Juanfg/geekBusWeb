@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Parada extends Migration
+class Ronda extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class Parada extends Migration
      */
     public function up()
     {
-        Schema::create('Parada', function (Blueprint $table) {
-            $table->increments('idParada');
-            $table->string('nombre');
-            $table->double('lat');
-            $table->double('long');
+        Schema::create('Ronda', function (Blueprint $table) {
+            $table->integer('conductor')->unsigned();
+            $table->foreign('conductor')->references('idCamion')->on('Camion')->onDelete('cascade');
+            $table->dateTime('entrada');
+            $table->dateTime('salida');
         });
     }
 
@@ -28,6 +28,6 @@ class Parada extends Migration
      */
     public function down()
     {
-        Schema::drop('Parada');
+        Schema::drop('Ronda');
     }
 }
