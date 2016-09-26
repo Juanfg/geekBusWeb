@@ -15,9 +15,9 @@ class ParadaCamion extends Migration
     {
         Schema::create('ParadaCamion', function (Blueprint $table) {
             $table->integer('idRuta')->unsigned();
-            $table->foreign('idRuta')->references('idRuta')->on('Ruta');
-            $table->int('idParada');
-            $table->foreign('idParada')->references('idParada')->on('Parada');
+            $table->foreign('idRuta')->references('idRuta')->on('Ruta')->onDelete('cascade');
+            $table->integer('idParada')->unsigned();
+            $table->foreign('idParada')->references('idParada')->on('Parada')->onDelete('cascade');
             $table->integer('numParada');
         });
     }
