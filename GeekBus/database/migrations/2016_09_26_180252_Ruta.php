@@ -14,7 +14,7 @@ class Ruta extends Migration
     public function up()
     {
         Schema::create('Ruta', function (Blueprint $table) {
-            $table->increments('IdRuta');
+            $table->increments('idRuta');
             $table->string('nombre');
             $table->string('descripcion');
         });

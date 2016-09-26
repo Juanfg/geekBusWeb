@@ -15,9 +15,8 @@ class Camion extends Migration
     {
         Schema::create('Camion', function (Blueprint $table) {
             $table->increments('idCamion');
-            $table->primary('idCamion');
-            $table->integer('idRuta');
-            $table->foreign('idRuta')->references('idRuta')->on('Ruta');
+            $table->integer('idRuta')->unsigned();
+            $table->foreign('idRuta')->references('idRuta')->on('Ruta')->onDelete('cascade');
             $table->integer('unidad');
             $table->integer('asientos');
             $table->integer('capacidadMaxima');
