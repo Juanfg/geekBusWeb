@@ -15,7 +15,7 @@ class Rondas extends Migration
     {
         Schema::create('Rondas', function (Blueprint $table) {
             $table->integer('conductor')->unsigned();
-            $table->foreign('conductor')->references('idCamion')->on('Camiones')->onDelete('cascade');
+            $table->foreign('conductor')->references('idConductor')->on('Conductores')->onDelete('cascade');
             $table->dateTime('entrada');
             $table->dateTime('salida');
         });
