@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'api'], function () {
+Route::group(['prefix' => 'cliente'], function () {
 
     Route::get('rutas', 'ApiController@getRutas');
 
@@ -27,7 +27,7 @@ Route::group(['prefix' => 'api'], function () {
 
 });
 
-Route::group(['prefix' => 'service'], function () {
+Route::group(['prefix' => 'servicio'], function () {
 
     Route::post('login', 'RaspBerry@login');
 
