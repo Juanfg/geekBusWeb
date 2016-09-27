@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Evento extends Migration
+class Eventos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class Evento extends Migration
      */
     public function up()
     {
-        Schema::create('Evento', function (Blueprint $table) {
+        Schema::create('Eventos', function (Blueprint $table) {
             $table->integer('idCamion')->unsigned();
-            $table->foreign('idCamion')->references('idCamion')->on('Camion')->onDelete('cascade');
+            $table->foreign('idCamion')->references('idCamion')->on('Camiones')->onDelete('cascade');
             $table->datetime('fechahora');
             $table->integer('idTipoEvento')->unsigned();
-            $table->foreign('idTipoEvento')->references('idTipoEvento')->on('TipoEvento')->onDelete('cascade');
+            $table->foreign('idTipoEvento')->references('idTipoEvento')->on('TipoEventos')->onDelete('cascade');
             $table->integer('valor');
             $table->integer('conductor')->unsigned();
-            $table->foreign('conductor')->references('idConductor')->on('Conductor')->onDelete('cascade');
+            $table->foreign('conductor')->references('idConductor')->on('Conductores')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ class Evento extends Migration
      */
     public function down()
     {
-        Schema::drop('Evento');
+        Schema::drop('Eventos');
     }
 }

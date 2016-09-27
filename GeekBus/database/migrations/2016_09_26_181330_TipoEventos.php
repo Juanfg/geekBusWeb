@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Ruta extends Migration
+class TipoEventos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class Ruta extends Migration
      */
     public function up()
     {
-        Schema::create('Ruta', function (Blueprint $table) {
-            $table->increments('idRuta');
-            $table->string('nombre');
-            $table->string('descripcion');
+        Schema::create('TipoEventos', function (Blueprint $table) {
+            $table->increments('idTipoEvento');
+            $table->String('descripcion');
         });
     }
 
@@ -27,6 +26,6 @@ class Ruta extends Migration
      */
     public function down()
     {
-        Schema::drop('Ruta');
+        Schema::drop('TipoEventos');
     }
 }

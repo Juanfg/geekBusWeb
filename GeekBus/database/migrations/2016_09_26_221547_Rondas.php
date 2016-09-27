@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TipoEvento extends Migration
+class Rondas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class TipoEvento extends Migration
      */
     public function up()
     {
-        Schema::create('TipoEvento', function (Blueprint $table) {
-            $table->increments('idTipoEvento');
-            $table->String('descripcion');
+        Schema::create('Rondas', function (Blueprint $table) {
+            $table->integer('conductor')->unsigned();
+            $table->foreign('conductor')->references('idCamion')->on('Camiones')->onDelete('cascade');
+            $table->dateTime('entrada');
+            $table->dateTime('salida');
         });
     }
 
@@ -26,6 +28,6 @@ class TipoEvento extends Migration
      */
     public function down()
     {
-        Schema::drop('TipoEvento');
+        Schema::drop('Rondas');
     }
 }

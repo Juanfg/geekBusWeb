@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Senial extends Migration
+class Paradas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class Senial extends Migration
      */
     public function up()
     {
-        Schema::create('Senial', function(Blueprint $table) {
-            $table->integer('idCamion')->unsigned();
-            $table->foreign('idCamion')->references('idCamion')->on('Camion')->onDelete('cascade');
-            $table->datetime('fechahora');
+        Schema::create('Paradas', function (Blueprint $table) {
+            $table->increments('idParada');
+            $table->string('nombre');
+            $table->double('lat');
+            $table->double('long');
         });
     }
 
@@ -27,6 +28,6 @@ class Senial extends Migration
      */
     public function down()
     {
-        Schema::drop('Senial');
+        Schema::drop('Paradas');
     }
 }

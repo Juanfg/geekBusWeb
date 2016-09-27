@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Camion extends Migration
+class Camiones extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class Camion extends Migration
      */
     public function up()
     {
-        Schema::create('Camion', function (Blueprint $table) {
+        Schema::create('Camiones', function (Blueprint $table) {
             $table->increments('idCamion');
             $table->integer('idRuta')->unsigned();
-            $table->foreign('idRuta')->references('idRuta')->on('Ruta')->onDelete('cascade');
+            $table->foreign('idRuta')->references('idRuta')->on('Rutas')->onDelete('cascade');
             $table->integer('unidad');
             $table->integer('asientos');
             $table->integer('capacidadMaxima');
@@ -32,6 +32,6 @@ class Camion extends Migration
      */
     public function down()
     {
-        Schema::drop('Camion');
+        Schema::drop('Camiones');
     }
 }

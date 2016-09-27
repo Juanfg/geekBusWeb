@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Conductor extends Migration
+class Rutas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class Conductor extends Migration
      */
     public function up()
     {
-        Schema::create('Conductor', function (Blueprint $table) {
-            $table->increments('idConductor');
+        Schema::create('Rutas', function (Blueprint $table) {
+            $table->increments('idRuta');
             $table->string('nombre');
-            $table->string('fotoPath');
+            $table->string('descripcion');
         });
-
     }
 
     /**
@@ -28,6 +27,6 @@ class Conductor extends Migration
      */
     public function down()
     {
-        Schema::drop('Conductor');
+        Schema::drop('Rutas');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Ubicacion extends Migration
+class Ubicaciones extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class Ubicacion extends Migration
      */
     public function up()
     {
-        Schema::create('Ubicacion', function (Blueprint $table) {
+        Schema::create('Ubicaciones', function (Blueprint $table) {
             $table->integer('idCamion')->unsigned();
-            $table->foreign('idCamion')->references('idCamion')->on('Camion')->onDelete('cascade');
+            $table->foreign('idCamion')->references('idCamion')->on('Camiones')->onDelete('cascade');
             $table->datetime('fechahora');
             $table->double('lat');
             $table->double('long');
@@ -29,6 +29,6 @@ class Ubicacion extends Migration
      */
     public function down()
     {
-        Schema::drop('Ubicacion');
+        Schema::drop('Ubicaciones');
     }
 }
