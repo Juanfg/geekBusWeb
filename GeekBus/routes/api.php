@@ -24,4 +24,15 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('paradas/{id}/rutas', 'ApiController@getParadaRutas');
 
 	Route::get('paradas_rutas/', 'ApiController@getParadasRutasCercanas');
+
+});
+
+Route::group(['prefix' => 'service'], function () {
+
+    Route::post('login', 'RaspBerry@login');
+
+    Route::post('update', 'RaspBerry@update');
+
+    Route::post('shutdown', 'RaspBerry@shutdown');
+
 });
