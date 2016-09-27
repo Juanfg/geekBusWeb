@@ -17,6 +17,7 @@ class Conductores extends Migration
             $table->increments('idConductor');
             $table->string('nombre');
             $table->string('fotoPath');
+            $table->string('loginKey');
         });
 
     }
