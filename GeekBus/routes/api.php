@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::group(['prefix' => 'api'], function () {
+
+    Route::get('rutas', 'ApiController@getRutas');
+
+    Route::get('rutas/{id}', 'ApiController@getInfoRuta');
+
+	Route::get('paradas', 'ApiController@getParadas');
+
+    Route::get('paradas/{id}/rutas', 'ApiController@getParadaRutas');
+
+	Route::get('paradas_rutas/', 'ApiController@getParadasRutasCercanas');
+});
