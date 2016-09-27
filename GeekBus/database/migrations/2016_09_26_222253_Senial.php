@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Ruta extends Migration
+class Senial extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class Ruta extends Migration
      */
     public function up()
     {
-        Schema::create('Ruta', function (Blueprint $table) {
-            $table->increments('idRuta');
-            $table->string('nombre');
-            $table->string('descripcion');
+        Schema::create('Senial', function(Blueprint $table) {
+            $table->integer('idCamion')->unsigned();
+            $table->foreign('idCamion')->references('idCamion')->on('Camion')->onDelete('cascade');
+            $table->datetime('fechahora');
         });
     }
 
@@ -27,6 +27,6 @@ class Ruta extends Migration
      */
     public function down()
     {
-        Schema::drop('Ruta');
+        Schema::drop('Senial');
     }
 }
