@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container">
+
+    @if (session('barry_allen'))
+    <div class="alert alert-success">
+        {{ session('barry_allen') }}
+    </div>
+    @endif
+    
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

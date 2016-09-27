@@ -82,6 +82,6 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
         //$this->guard()->login($user);
-        return redirect($this->redirectPath())->with('barry_allen' => 'Registrado con exito');
+        return redirect($this->redirectPath())->with('barry_allen', 'Registrado con exito');
     }
 }
