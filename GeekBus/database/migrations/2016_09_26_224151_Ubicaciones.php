@@ -14,11 +14,13 @@ class Ubicaciones extends Migration
     public function up()
     {
         Schema::create('Ubicaciones', function (Blueprint $table) {
+            $table->increments('idUbicacion');
             $table->integer('idCamion')->unsigned();
             $table->foreign('idCamion')->references('idCamion')->on('Camiones')->onDelete('cascade');
             $table->datetime('fechahora');
             $table->double('lat');
             $table->double('long');
+            $table->timestamps();
         });
     }
 
