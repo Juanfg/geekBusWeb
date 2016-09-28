@@ -12,7 +12,16 @@
 */
 
 //Login
-Route::get('/', 'HomeController@login');
+
+Route::get('/', function() {
+	return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home','HomeController@index');
+
+/*Route::get('/', 'HomeController@login');
 
 Route::get('dashboard', 'HomeController@dashboard');
 
@@ -26,4 +35,4 @@ Route::resource('paradas', 'ParadaController');
 
 Route::get('rondas', 'HomeController@rondas');
 
-Auth::routes();
+Auth::routes();*/
