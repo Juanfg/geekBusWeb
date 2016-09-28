@@ -8,12 +8,12 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>DASHGUM - FREE Bootstrap Admin Template</title>
+    <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
 
 
     <!-- Bootstrap core CSS -->
-    <link href="/assetsSidebar/css/bootstrap.css" rel="stylesheet">
+    {!! HTML::style('css/assetsSidebar/css/bootstrap.css') !!}
     <!--external css-->
     <link href="/assetsSidebar/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/assetsSidebar/css/zabuto_calendar.css">
@@ -25,6 +25,7 @@
     <link href="/assetsSidebar/css/style-responsive.css" rel="stylesheet">
 
     <script src="/assetsSidebar/js/chart-master/Chart.js"></script>
+    @stack('scripts')
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,7 +43,7 @@
       <!--header start-->
       <header class="header black-bg">
             <!--logo start-->
-            <a href="index.html" class="logo"><b>GEEKBUS</b></a>
+            <a href={{ url('user/profile'); }} class="logo"><b>GEEKBUS</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
