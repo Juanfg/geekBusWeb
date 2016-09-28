@@ -17,8 +17,8 @@ class Ronda extends Model
         return $this->belongsTo('App\Camion', 'idCamion');
     }
 
-    public function conductor()
+    public function conductores()
     {
-        return $this->hasMany('App\Conductor', 'idConductor');
+        return $this->belongsTo('App\Conductor', 'idConductor');
     }
 }

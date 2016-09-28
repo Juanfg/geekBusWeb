@@ -20,17 +20,17 @@ class Camion extends Model
         return $this->hasOne('App\Senial', 'idSenial');
     } 
 
-    public function ronda()
+    public function rondas()
     {
         return $this->hasMany('App\Ronda', 'idRonda');
     }
 
-    public function evento()
+    public function eventos()
     {
         return $this->hasMany('App\Evento', 'idEvento');
     }
 
-    public function ubicacion()
+    public function ubicacions()
     {
         return $this->hasMany('App\Ubicacion', 'idUbicacion');
     }

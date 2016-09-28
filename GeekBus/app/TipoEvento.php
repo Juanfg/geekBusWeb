@@ -12,7 +12,7 @@ class TipoEvento extends Model
 
     protected $primaryKey = "idTipoEvento";
     
-    public function evento()
+    public function eventos()
     {
         return $this->hasMany('App\Evento', 'idEvento');
     }

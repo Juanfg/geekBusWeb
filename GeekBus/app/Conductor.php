@@ -12,12 +12,12 @@ class Conductor extends Model
 
     protected $primaryKey = "idConductor";
 
-    public function ronda()
+    public function rondas()
     {
         return $this->hasMany('App\Ronda', 'idRonda');
     }
 
-    public function evento()
+    public function eventos()
     {
         return $this->hasMany('App\Evento', 'idEvento');
     }
