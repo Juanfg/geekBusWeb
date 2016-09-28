@@ -11,4 +11,14 @@ class Conductor extends Model
     protected $fillable = ['idConductor', 'nombre', 'fotoPath', 'loginKey'];
 
     protected $primaryKey = "idConductor";
+
+    public function rondas()
+    {
+        return $this->hasMany('App\Ronda', 'idRonda');
+    }
+
+    public function eventos()
+    {
+        return $this->hasMany('App\Evento', 'idEvento');
+    }
 }

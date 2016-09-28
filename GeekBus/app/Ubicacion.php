@@ -11,4 +11,9 @@ class Ubicacion extends Model
     protected $fillable = ['idUbicacion', 'idCamion', 'fechahora', 'lat', 'long'];
 
     protected $primaryKey = "idUbicacion";
+
+    public function camion()
+    {
+        return $this->belongsTo('App\Camion', 'idCamion');
+    }
 }

@@ -11,4 +11,9 @@ class Incidencia extends Model
     protected $fillable = ['idIncidencia', 'idEvento'];
 
     protected $primaryKey = "idIncidencia";
+
+    public function evento()
+    {
+        return $this->belongsTo('App\Evento', 'idEvento');
+    }
 }
