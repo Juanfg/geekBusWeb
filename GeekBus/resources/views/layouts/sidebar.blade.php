@@ -115,8 +115,12 @@
               </ul>
               <!-- sidebar menu end-->
           </div>
+              <section id="main-content">
+      @yield('content');
+      </section>
       </aside>
       <!--sidebar end-->
       </section>
+
       </body>
       </html>
