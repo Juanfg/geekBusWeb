@@ -8,7 +8,7 @@ class Senial extends Model
 {
     protected $table = "Seniales";
 
-    protected $fillable = ['idCamion', 'fechahora'];
+    protected $fillable = ['idSenial', 'idCamion'];
 
     protected $primaryKey = "idSenial";
 

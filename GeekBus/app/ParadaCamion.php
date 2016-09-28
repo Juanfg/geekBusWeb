@@ -8,7 +8,7 @@ class ParadaCamion extends Model
 {
     protected $table = "ParadaCamiones";
 
-    protected $fillable = ['idRuta', 'idParada', 'numParada'];
+    protected $fillable = ['idParadaCamion', 'idRuta', 'idParada', 'numParada'];
 
     protected $primaryKey = "idParadaCamion";
 

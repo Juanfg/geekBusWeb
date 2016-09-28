@@ -8,7 +8,7 @@ class Ubicacion extends Model
 {
     protected $table = "Ubicaciones";
 
-    protected $fillable = ['idCamion', 'fechahora', 'lat', 'long'];
+    protected $fillable = ['idUbicacion', 'idCamion', 'fechahora', 'lat', 'long'];
 
     protected $primaryKey = "idUbicacion";
 

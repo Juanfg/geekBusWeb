@@ -8,13 +8,13 @@ class Ronda extends Model
 {
     protected $table = "Rondas";
 
-    protected $fillable = ['conductor', 'entrada', 'salida'];
+    protected $fillable = ['idRonda', 'idConductor', 'idCamion', 'entrada', 'salida'];
 
     protected $primaryKey = "idRonda";
 
-    public function Conductor()
+    public function Ruta()
     {
-        return $this->hasOne('App\Conductor', 'foreign_key', 'idConductor');
+        return $this->hasOne('App\Ruta', 'foreign_key', 'idConductor');
     }
 
     public function Camion()
