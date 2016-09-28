@@ -14,10 +14,14 @@ class Rondas extends Migration
     public function up()
     {
         Schema::create('Rondas', function (Blueprint $table) {
-            $table->integer('conductor')->unsigned();
-            $table->foreign('conductor')->references('idConductor')->on('Conductores')->onDelete('cascade');
+            $table->increments('idRonda');
+            $table->integer('idConductor')->unsigned();
+            $table->foreign('idConductor')->references('idConductor')->on('Conductores')->onDelete('cascade');
+            $table->integer('idCamion')->unsigned();
+            $table->foreign('idCamion')->references('idCamion')->on('Camiones')->onDelete('cascade');
             $table->dateTime('entrada');
             $table->dateTime('salida');
+            $table->timestamps();
         });
     }
 

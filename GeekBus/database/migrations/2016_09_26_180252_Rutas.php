@@ -17,6 +17,7 @@ class Rutas extends Migration
             $table->increments('idRuta');
             $table->string('nombre');
             $table->string('descripcion');
+            $table->timestamps();
         });
     }
 

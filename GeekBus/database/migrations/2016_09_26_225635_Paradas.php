@@ -18,6 +18,7 @@ class Paradas extends Migration
             $table->string('nombre');
             $table->double('lat');
             $table->double('long');
+            $table->timestamps();
         });
     }
 
