@@ -11,9 +11,4 @@ class Senial extends Model
     protected $fillable = ['idSenial', 'idCamion'];
 
     protected $primaryKey = "idSenial";
-
-    public function Camion()
-    {
-         return $this->hasOne('App\Camion', 'foreign_key', 'idCamion');
-    }
 }

@@ -11,9 +11,4 @@ class Incidencia extends Model
     protected $fillable = ['idIncidencia', 'idEvento'];
 
     protected $primaryKey = "idIncidencia";
-
-    public function Evento()
-    {
-        return $this->hasOne('App\Evento', 'foreign_key', 'idEvento');
-    }
 }
