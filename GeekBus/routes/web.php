@@ -11,10 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Login
+Route::get('/', 'HomeController@login');
+
+Route::get('dashboard', 'HomeController@dashboard');
+
+Route::resource('autobuses', 'BusController');
+
+Route::resource('choferes', 'ChoferController');
+
+Route::resource('rutas', 'RutaController');
+
+Route::resource('paradas', 'ParadaController');
+
+Route::get('rondas', 'HomeController@rondas');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
