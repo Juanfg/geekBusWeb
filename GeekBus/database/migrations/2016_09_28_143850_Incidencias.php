@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Conductores extends Migration
+class Incidencias extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class Conductores extends Migration
      */
     public function up()
     {
-        Schema::create('Conductores', function (Blueprint $table) {
-            $table->increments('idConductor');
-            $table->string('nombre');
-            $table->string('fotoPath');
-            $table->string('loginKey');
+        Schema::create('Incidencias', function (Blueprint $table) {
+            $table->increments('idIncidencia');
+            $table->integer('idEvento')->unsigned();
+            $table->foreign('idEvento')->references('idEvento')->on('Eventos')->onDelete('cascade');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -30,6 +28,6 @@ class Conductores extends Migration
      */
     public function down()
     {
-        Schema::drop('Conductores');
+        Schema::drop('Incidencias');
     }
 }

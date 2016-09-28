@@ -14,9 +14,10 @@ class Seniales extends Migration
     public function up()
     {
         Schema::create('Seniales', function(Blueprint $table) {
+            $table->increments('idSenial');
             $table->integer('idCamion')->unsigned();
             $table->foreign('idCamion')->references('idCamion')->on('Camiones')->onDelete('cascade');
-            $table->datetime('fechahora');
+            $table->timestamps();
         });
     }
 

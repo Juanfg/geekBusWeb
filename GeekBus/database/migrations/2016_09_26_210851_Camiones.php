@@ -23,6 +23,7 @@ class Camiones extends Migration
             $table->integer('rpmMax');
             $table->integer('velMax');
             $table->string('macAddress');
+            $table->timestamps();
         });
     }
 

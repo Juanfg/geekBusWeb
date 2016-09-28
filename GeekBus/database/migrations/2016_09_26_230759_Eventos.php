@@ -14,6 +14,7 @@ class Eventos extends Migration
     public function up()
     {
         Schema::create('Eventos', function (Blueprint $table) {
+            $table->increments('idEvento');
             $table->integer('idCamion')->unsigned();
             $table->foreign('idCamion')->references('idCamion')->on('Camiones')->onDelete('cascade');
             $table->datetime('fechahora');
@@ -22,6 +23,7 @@ class Eventos extends Migration
             $table->integer('valor');
             $table->integer('conductor')->unsigned();
             $table->foreign('conductor')->references('idConductor')->on('Conductores')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
