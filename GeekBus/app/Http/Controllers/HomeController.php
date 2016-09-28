@@ -28,6 +28,6 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return "TEST";
+        return view('layouts.contentDashboard');;
     }
 }

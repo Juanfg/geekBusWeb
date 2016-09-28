@@ -13,7 +13,7 @@
 
 
     <!-- Bootstrap core CSS -->
-    {!! link_to_asset('css/assetsSidebar/css/bootstrap.css') !!}
+    <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/bootstrap.css') }}">
     <!--external css-->
     <link href="/assetsSidebar/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/assetsSidebar/css/zabuto_calendar.css">
