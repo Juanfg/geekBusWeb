@@ -1,15 +1,14 @@
-<!DOCTYPE html>
+@extends('layouts.sidebar')
+@section('title', 'Dashboard')
 
-<!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
+
       <!--main content start-->
-      <section id="main-content">
+    @section('content')
           <section class="wrapper">
 
               <div class="row">
                   <div class="col-lg-9 main-chart">
-                     <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:600px;width:1200px;'><div id='gmap_canvas' style='height:600px;width:950px;'></div><div><small><a href="http://www.embedgooglemaps.com/en/">Generate your map here, quick and easy!                 Give your customers directions                  Get found</a></small></div><div><small><a href="https://binaireoptieservaringen.nl/">Hulp bij beleggen!</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:15,center:new google.maps.LatLng(18.995299111048357,-98.2744439948288),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(18.995299111048357,-98.2744439948288)});infowindow = new google.maps.InfoWindow({content:'<strong>Title</strong><br>lomas de angelopolis<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                     <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:600px;width:1000px;'><div id='gmap_canvas' style='height:600px;width:950px;'></div><div><small><a href="http://www.embedgooglemaps.com/en/">Generate your map here, quick and easy!                 Give your customers directions                  Get found</a></small></div><div><small><a href="https://binaireoptieservaringen.nl/">Hulp bij beleggen!</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:15,center:new google.maps.LatLng(18.995299111048357,-98.2744439948288),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(18.995299111048357,-98.2744439948288)});infowindow = new google.maps.InfoWindow({content:'<strong>Title</strong><br>lomas de angelopolis<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
                   </div><!-- /col-lg-9 END SECTION MIDDLE -->
 
 
@@ -134,8 +133,6 @@
                       		</p>
                       	</div>
                       </div>
-
-
                   </div><!-- /col-lg-3 -->
               </div><! --/row -->
           </section>
@@ -152,8 +149,7 @@
           </div>
       </footer>
       <!--footer end-->
-  </section>
-
+    @endsection
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/jquery-1.8.3.min.js"></script>
@@ -207,8 +203,6 @@
             var to = $("#" + id).data("to");
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
+    
     </script>
 
-
-  </body>
-</html>

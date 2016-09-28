@@ -10,8 +10,5 @@ class TipoEvento extends Model
 
     protected $fillable = ['idTipoEvento', 'descripcion'];
 
-    public function Evento()
-    {
-        return $this->hasMany('Evento');
-    }
+    protected $primaryKey = "idTipoEvento";
 }

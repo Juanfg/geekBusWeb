@@ -8,15 +8,7 @@ class ParadaCamion extends Model
 {
     protected $table = "ParadaCamiones";
 
-    protected $fillable = ['idRuta', 'idParada', 'numParada'];
+    protected $fillable = ['idParadaCamion', 'idRuta', 'idParada', 'numParada'];
 
-    public function Parada()
-    {
-        return $this->hasOne('Parada');
-    }
-
-    public function Ruta()
-    {
-        return $this->hasOne('Ruta');
-    }
+    protected $primaryKey = "idParadaCamion";
 }

@@ -14,7 +14,7 @@
 
 Route::group(['middleware'=>'auth'], function(){
 
-	Route::get('/', 'HomeController@dashbord');
+	Route::get('/', 'HomeController@dashboard');
 
 	Route::get('/home',function(){
 
@@ -34,3 +34,6 @@ Route::group(['middleware'=>'auth'], function(){
 
 Auth::routes();
 
+Route::get('test',function(){
+	return view('layouts.contentDashboard');
+});

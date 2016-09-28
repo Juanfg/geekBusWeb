@@ -8,10 +8,7 @@ class Ubicacion extends Model
 {
     protected $table = "Ubicaciones";
 
-    protected $fillable = ['idCamion', 'fechahora', 'lat', 'long'];
+    protected $fillable = ['idUbicacion', 'idCamion', 'fechahora', 'lat', 'long'];
 
-    public function Camion()
-    {
-        return $this->belongsTo('App\Camion');
-    }
+    protected $primaryKey = "idUbicacion";
 }
