@@ -15,14 +15,9 @@ class Camion extends Model
 
     protected $primaryKey = "idCamion";
 
-    public function Senial()
-    {
-        return $this->hasMany('App\Senial');
-    }
-
     public function Ruta()
     {
-        return $this->hasOne('App\Ruta');
+        return $this->hasOne('App\Ruta', 'foreign_key', 'idRuta');
     }
 
     public function Ubicacion()

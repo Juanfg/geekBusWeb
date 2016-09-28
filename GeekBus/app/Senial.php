@@ -14,6 +14,6 @@ class Senial extends Model
 
     public function Camion()
     {
-         return $this->belongsTo('App\Camion');
+         return $this->hasOne('App\Camion', 'foreign_key', 'idCamion');
     }
 }

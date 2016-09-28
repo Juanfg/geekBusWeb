@@ -12,9 +12,9 @@ class Ronda extends Model
 
     protected $primaryKey = "idRonda";
 
-    public function Ruta()
+    public function Conductor()
     {
-        return $this->hasOne('App\Ruta', 'foreign_key', 'idConductor');
+        return $this->hasOne('App\Conductor', 'foreign_key', 'idConductor');
     }
 
     public function Camion()
