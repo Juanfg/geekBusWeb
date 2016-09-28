@@ -21,4 +21,14 @@ class Evento extends Model
     {
         return $this->belongsTo('App\Camion', 'idCamion');
     }
+
+    public function conductor()
+    {
+        return $this->belongsTo('App\Conductor', 'idConductor');
+    }
+
+    public function tipoEvento()
+    {
+        return $this->belongsTo('App\TipoEvento', 'idTipoEventos');
+    }
 }

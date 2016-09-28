@@ -17,8 +17,8 @@ class Conductor extends Model
         return $this->hasMany('App\Ronda', 'idRonda');
     }
 
-    public function ubicacion()
+    public function evento()
     {
-        return $this->hasMany('App\Ubicacion', 'idUbicacion');
+        return $this->hasMany('App\Evento', 'idEvento');
     }
 }
