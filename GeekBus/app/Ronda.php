@@ -8,10 +8,7 @@ class Ronda extends Model
 {
     protected $table = "Rondas";
 
-    protected $fillable = ['conductor', 'entrada', 'salida'];
+    protected $fillable = ['idRonda', 'idConductor', 'idCamion', 'entrada', 'salida'];
 
-    public function Conductor()
-    {
-        return $this->belongsTo('Conductor');
-    }
+    protected $primaryKey = "idRonda";
 }
