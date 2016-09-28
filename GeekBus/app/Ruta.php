@@ -10,6 +10,8 @@ class Ruta extends Model
 
     protected $fillable = ['idRuta', 'nombre', 'descripcion'];
 
+    protected $primaryKey = "idRuta";
+
     public function Camion()
     {
         return $this->belongsToMany('App\Camion');

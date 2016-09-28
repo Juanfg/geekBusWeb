@@ -13,6 +13,8 @@ class Camion extends Model
         'rpmMax', 'velMax', 'macAddress'
         ];
 
+    protected $primaryKey = "idCamion";
+
     public function Senial()
     {
         return $this->hasMany('App\Senial');

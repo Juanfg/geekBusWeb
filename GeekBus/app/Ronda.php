@@ -10,8 +10,15 @@ class Ronda extends Model
 
     protected $fillable = ['conductor', 'entrada', 'salida'];
 
+    protected $primaryKey = "idRonda";
+
     public function Conductor()
     {
-        return $this->belongsTo('Conductor');
+        return $this->hasOne('App\Conductor', 'foreign_key', 'idConductor');
+    }
+
+    public function Camion()
+    {
+        return $this->hasOne('App\Camion', 'foreign_key', 'idCamion');
     }
 }

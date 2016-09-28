@@ -10,6 +10,8 @@ class Evento extends Model
 
     protected $fillable = ['idCamion', 'fechahora', 'idTipoEvento', 'valor', 'conductor'];
 
+    protected $primaryKey = "idEvento";
+
     public function Camion()
     {
         return $this->belongsTo('Camion');

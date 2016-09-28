@@ -10,13 +10,15 @@ class ParadaCamion extends Model
 
     protected $fillable = ['idRuta', 'idParada', 'numParada'];
 
+    protected $primaryKey = "idParadaCamion";
+
     public function Parada()
     {
-        return $this->hasOne('Parada');
+        return $this->hasOne('App\Parada', 'foreign_key', 'idParada');
     }
 
     public function Ruta()
     {
-        return $this->hasOne('Ruta');
+        return $this->hasOne('App\Ruta', 'foreign_key', 'idRuta');
     }
 }
