@@ -11,28 +11,26 @@
 |
 */
 
-//Login
 
-Route::get('/', function() {
-	return view('welcome');
+Route::group(['middleware'=>'auth'], function(){
+
+	Route::get('/', 'HomeController@dashbord');
+
+	Route::get('/home',function(){
+
+		return redirect()->route('/');
+	});
+
+	Route::resource('autobuses', 'BusController');
+
+	Route::resource('choferes', 'ChoferController');
+
+	Route::resource('rutas', 'RutaController');
+
+	Route::resource('paradas', 'ParadaController');
+
+	Route::get('rondas', 'RondaController');
 });
 
 Auth::routes();
 
-Route::get('/home','HomeController@index');
-
-/*Route::get('/', 'HomeController@login');
-
-Route::get('dashboard', 'HomeController@dashboard');
-
-Route::resource('autobuses', 'BusController');
-
-Route::resource('choferes', 'ChoferController');
-
-Route::resource('rutas', 'RutaController');
-
-Route::resource('paradas', 'ParadaController');
-
-Route::get('rondas', 'HomeController@rondas');
-
-Auth::routes();*/
