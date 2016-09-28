@@ -10,5 +10,10 @@ class Parada extends Model
 
     protected $fillable = ['idParada', 'nombre', 'lat', 'long'];
 
-    protected $primaryKey = "idEvento";
+    protected $primaryKey = "idParada";
+
+    public function camiones()
+    {
+        return $this->belongsToMany('App\Ruta', 'ParadaCamiones', 'idParada', 'idRuta');
+    }
 }
