@@ -30,7 +30,7 @@ class Camion extends Model
         return $this->hasMany('App\Evento', 'idEvento');
     }
 
-    public function ubicacions()
+    public function ubicaciones()
     {
         return $this->hasMany('App\Ubicacion', 'idUbicacion');
     }
