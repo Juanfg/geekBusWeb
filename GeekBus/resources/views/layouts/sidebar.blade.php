@@ -13,7 +13,7 @@
 
 
     <!-- Bootstrap core CSS -->
-    {!! HTML::style('css/assetsSidebar/css/bootstrap.css') !!}
+    {!! link_to_asset('css/assetsSidebar/css/bootstrap.css') !!}
     <!--external css-->
     <link href="/assetsSidebar/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/assetsSidebar/css/zabuto_calendar.css">
@@ -41,9 +41,10 @@
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
       <!--header start-->
+
       <header class="header black-bg">
             <!--logo start-->
-            <a href={{ url('user/profile'); }} class="logo"><b>GEEKBUS</b></a>
+            {{--<a href={{ url('user/profile'); }} class="logo"><b>GEEKBUS</b></a>--}}
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -116,3 +117,6 @@
           </div>
       </aside>
       <!--sidebar end-->
+      </section>
+      </body>
+      </html>

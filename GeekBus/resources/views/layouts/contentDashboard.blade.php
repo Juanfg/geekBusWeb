@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+@extends('layouts.sidebar')
+@section('title', 'Dashboard')
 
-<!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
+
       <!--main content start-->
+    @section('content')
       <section id="main-content">
           <section class="wrapper">
 
@@ -134,8 +134,6 @@
                       		</p>
                       	</div>
                       </div>
-
-
                   </div><!-- /col-lg-3 -->
               </div><! --/row -->
           </section>
@@ -153,7 +151,7 @@
       </footer>
       <!--footer end-->
   </section>
-
+  @endsection
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/jquery-1.8.3.min.js"></script>
@@ -207,8 +205,6 @@
             var to = $("#" + id).data("to");
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
+    
     </script>
 
-
-  </body>
-</html>
