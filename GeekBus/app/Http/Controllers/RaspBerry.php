@@ -14,6 +14,11 @@ class RaspBerry extends Controller
             ::chofer?%s
             ::idRuta?%s
         */
+
+        $this->validate($request,[
+            "chofer" => "required|string",
+            "idRuta" => "required|string",
+        ]);            
         $chofer = $request->chofer;
         $ruta = $request->idRuta;
 
@@ -39,6 +44,16 @@ class RaspBerry extends Controller
             ::lat?%lf
             ::long?%lf
         */
+
+        $this->validate($request,[
+            "auth" => "required|numeric",
+            "rpm" => "required|numeric",
+            "pasajeros" => "required|numeric",
+            "velocidad" "required|numeric",
+            "lat" => "required|numeric",
+            "long" => "required|numeric",
+        ]); 
+
         $auth = $request->auth;
         $rpm = $request->rpm;
         $pasajeros = $request->pasajeros;
@@ -61,6 +76,10 @@ class RaspBerry extends Controller
         /*recibe 
             ::auth?%d
         */
+
+        $this->validate($request,[
+            "auth" => "required|string",
+        ]);
         $auth = $request->auth;
 
         /*respuesta 
