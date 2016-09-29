@@ -15,6 +15,7 @@ use App\Ubicacion;
 use App\TipoEvento;
 use App\Evento;
 use App\Senial;
+use App\Parada;
 
 class RaspBerry extends Controller
 {
@@ -129,6 +130,30 @@ class RaspBerry extends Controller
             Evento::create(['idCamion'=>$idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$pasajeros,'valor'=>$pasajeros, 'conductor'=>$auth]);
             Evento::create(['idCamion'=>$idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$temperatura,'valor'=>$temp, 'conductor'=>$auth]);
             Evento::create(['idCamion'=>$idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$velocidad,'valor'=>$velocidad, 'conductor'=>$auth]);
+
+            $paradas = Parada::all();
+            $earthRadius = 6371000;
+            $distanceTreshold = 30;
+            foreach($paradas as $p)
+            {
+                $latFrom = deg2rad($p->lat);
+                $lonFrom = deg2rad($p->long);
+                $latTo = deg2rad($lat);
+                $lonTo = deg2rad($long);
+
+                $latDelta = $latTo - $latFrom;
+                $lonDelta = $lonTo - $lonFrom;
+
+                $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+                $distance = $angle * $earthRadius;
+                if($distance<$distanceTreshold)
+                {
+                    Evento::create(['idCamion'=>$idCamion,"fechahora"=>Carbon::now(),"idTipoEvento"=>TipoEvento::$parada,"valor"=>$p->idParada]);
+                }
+            }
+                
+
+            //cunado un camion pasa por una parada::: tiempo, parada, camion,
 
             //Actualizmos la senial para que no genere evento de desconexion
             $senial = Senial::firstOrNew(['idCamion'=>$idCamion]);

@@ -25,4 +25,5 @@ class TipoEvento extends Model
     static $pasajeros = 4;
     static $temperatura = 5;
     static $velocidad = 6;
+    static $parada = 7;
 }
