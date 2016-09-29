@@ -9,12 +9,8 @@
 
 <div class="col-sm-12"> 
 {!! Form::model(new App\Conductor, ['route' => ['choferes.store']]) !!}
-@include('conductores.form', ['submit_text' => 'crear'])
+@include('conductores.form', ['submit_text' => 'Crear Ruta'])
 </div>
-
-
-
-
 
 
 @endsection

@@ -10,16 +10,16 @@
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assetsSidebar/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assetsSidebar/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assetsSidebar/css/zabuto_calendar.css">
-    <link rel="stylesheet" type="text/css" href="assetsSidebar/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="assetsSidebar/lineicons/style.css">    
+<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/bootstrap.css') }}">     <!--external css--> 
+<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/font-awesome/css/font-awesome.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/zabuto_calendar.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/js/gritter/css/jquery.gritter.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/lineicons/style.css') }}">
+
     
     <!-- Custom styles for this template -->
-    <link href="assetsSidebar/css/style.css" rel="stylesheet">
-    <link href="assetsSidebar/css/style-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/style.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/style-responsive.css') }}">
 
     <script src="assetsSidebar/js/chart-master/Chart.js"></script>
     
