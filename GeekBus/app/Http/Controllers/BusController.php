@@ -37,7 +37,7 @@ class BusController extends Controller
     public function store(Request $request)
     {
         //ruta,unidad,asientos,capacidad,rpm,vel,mac;
-        this->validate($request,[
+        $this->validate($request,[
             "ruta" => "required",
             "unidad" => "required",
             "asientos" => "required",
