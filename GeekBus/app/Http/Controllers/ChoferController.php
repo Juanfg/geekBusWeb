@@ -37,6 +37,7 @@ class ChoferController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         do{
             $this->validate($request,[
                 "nombre" => "required|string",
@@ -58,6 +59,27 @@ class ChoferController extends Controller
             }
 
         }while(false);
+=======
+        $message = "";
+        $this->validate($request,[
+            "nombre" => "required|string",
+            "loginKey" => "required|string",
+            "image" => "required|image",
+        ]);
+
+        $path = $request->image->store('images');
+
+        $alreadyExists = Conductor::where("loginKey",$request->loginKey)->count();
+
+        if($alreadyExists == 0){
+            //no existe
+            Conductor::create(["nombre"=>$request->nombre, "loginKey"=>$request->loginKey, "fotoPath"=>$path]);
+        }else{
+            //existe
+            $request->session()->flash('error', "La llave ya esta en uso. Es muy importante que sea &uacute;nica");
+            return back()->withInput();
+        }
+>>>>>>> 47ef57085d725c9939d111ad8623c14c9c124590
 
         $request->session()->flash("message", "Creado con exito");
         return redirect()->route("choferes.create");

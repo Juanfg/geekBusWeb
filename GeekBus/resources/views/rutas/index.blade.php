@@ -5,6 +5,8 @@
 @section('content')
 
 <div class="col-lg-12">
+  <h2> Rutas </h2>
+  <p> En esta secci&oacute;n podr&aacute;s agregar, modificar, eliminar y editar las rutas que toman los camiones</p>
       <div class="content-panel">
 		  <h4><i class="fa fa-angle-right"></i> Rutas</h4>
           <section id="no-more-tables">
@@ -26,13 +28,18 @@
           	              <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                           <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
                       </td>
-
                   </tr>
                   </tbody>
               </table>
           </section>
       </div><!-- /content-panel -->
+      <br>
+      	<div align="right">
+			<button type="button" class="btn btn-success">Agregar Ruta</button>
+		</div>
   </div><!-- /col-lg-12 -->
+
+
 
 @endsection
 

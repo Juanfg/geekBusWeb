@@ -35,5 +35,9 @@ class SeedTipoEventos extends Seeder
             'idTipoEvento' => 6,
             'descripcion' => "Velocidad",
         ]);
+        DB::table('TipoEventos')->insert([
+            'idTipoEvento' => 7,
+            'descripcion' => "Parada",
+        ]);
     }
 }

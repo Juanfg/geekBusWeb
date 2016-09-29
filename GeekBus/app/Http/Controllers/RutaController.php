@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Ruta;
 
 class RutaController extends Controller
 {
@@ -36,7 +37,23 @@ class RutaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $message = "";
+        $this->validate($request,[
+            "nombre" => "required|string",
+            "descripcion" => "required|string",
+        ]);
+
+        $alreadyExists = Ruta::where("nombre", $request->nombre)->count();
+
+        if($alreadyExists == 0){
+            Ruta::create(["nombre"=>$request->nombre, "descripcion"=>$request->descripcion]);
+        }else{
+            $request->session()->flash("error", "Ya existe la ruta");
+            return back()->withInput();
+        }
+
+        $request->session()->flash("message", "Ruta creada con exito");
+        return redirect()->route("rutas.create");
     }
 
     /**
