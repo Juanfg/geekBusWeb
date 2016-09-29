@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Conductor;
 
 class ChoferController extends Controller
 {
@@ -36,7 +37,26 @@ class ChoferController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = "";
+        do{
+            $this->validate($request,[
+                "name" => "required|string",
+                "loginKey" => "required|string",
+                "image" => "required|image",
+            ]);
+
+            $alreadyExists = Conductor::where("loginKey",$request->loginKey)->count();
+
+            if($alreadyExists == 0){
+                //no existe
+                Conductor::create(["nombre"=>$request->nombre, "loginKey"=>$request->loginKey, "fotoPath"=>$request->fotoPath]);
+            }else{
+                //existe
+                return back()->withInput()->flash("ERROR", "Ya existe el conductor");
+            }
+
+        }while(false)
+
     }
 
     /**

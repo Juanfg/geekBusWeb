@@ -25,7 +25,7 @@ class RutaController extends Controller
      */
     public function create()
     {
-        //
+        return view("rutas.create");
     }
 
     /**
@@ -36,7 +36,7 @@ class RutaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
