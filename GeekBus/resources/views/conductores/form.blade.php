@@ -7,6 +7,7 @@
     {!!  Form::text('loginKey'); !!}
 </div>
 <div class="form-group">
+   {!! Form::label('loginKey', 'Foto del conductor:'); !!}
     {!! Form::file('image') !!}
 </div>
 <div class="form-group">
