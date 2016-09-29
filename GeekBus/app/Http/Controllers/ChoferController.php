@@ -16,7 +16,7 @@ class ChoferController extends Controller
      */
     public function index()
     {
-        //
+        return view('conductores.index');
     }
 
     /**

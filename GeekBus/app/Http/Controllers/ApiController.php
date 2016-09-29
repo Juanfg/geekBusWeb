@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+
+use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Support\Facades\DB;
+
+use App\Http\Controllers\Controller;
 
 class ApiController extends Controller
 {
@@ -16,6 +24,18 @@ class ApiController extends Controller
             ::limit?%d
             ::offset?%d
         */
+
+        $validator = Validator::make($request->all(), [
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+            'limit' => 'required|numeric',
+            'offset' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return "Success false";
+        }
+
         $lat = $request->lat;
         $long = $request->long;
         $limit = $request->limit;
@@ -41,44 +61,10 @@ class ApiController extends Controller
             }
         ]
         */
-        //TEST
-        $nombreGlobal = "nglobal";
-        $idGlobal = 123;
-
-        $idSalida = 234;
-        $nombreSalida = "nSalida";
-        $latSalida = 20.15;
-        $longSalida = 14.86;
-
-        $idDestino = 243;
-        $nombreDestino = "nDestino";
-        $latDestino = 17.87;
-        $longDestino = 13.14159;
-
-        //JSON ARRAY FORMAT
-        $assoc = array(
-            "nombre"=>$nombreGlobal,
-            "id"=>$idGlobal,
-            "salida"=>array(
-                "id"=>$idSalida,
-                "nombre"=>$nombreSalida,
-                "lat"=>$latSalida,
-                "long"=>$longSalida
-            ),
-            "destino"=>array(
-                "id"=>$idDestino,
-                "nombre"=>$nombreDestino,
-                "lat"=>$latDestino,
-                "long"=>$longDestino
-                )
-            );
-
-        $respuesta = json_encode($assoc);
-
-        return $respuesta; 
+        return void;
     }
 
-    public function getInfoRuta($request)
+    public function getInfoRuta(Request $request)
     {
         /*recibe 
             {rutaId}
@@ -105,11 +91,14 @@ class ApiController extends Controller
                 }
             ]
         */
-        //TEST
-        return "void";
+
+
+        // $respuesta = json_encode($assoc);
+
+        return void; 
     }
 
-    public function getParadas(Request $request)
+    public function getParadas($request)
     {
         /*recibe
             ::lat?%lf
@@ -117,6 +106,18 @@ class ApiController extends Controller
             ::limit?%d
             ::offset?%d
         */
+
+        $validator = Validator::make($request->all(), [
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+            'limit' => 'required|numeric',
+            'offset' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return "Success false";
+        }
+
         $lat = $request->lat;
         $long = $request->long;
         $limit = $request->limit;
@@ -134,7 +135,11 @@ class ApiController extends Controller
             ]
         }
         */
-        return "void";
+
+
+        // $respuesta = json_encode($assoc);
+
+        return void; 
     }
 
     public function getParadaRutas($request)
@@ -182,7 +187,18 @@ class ApiController extends Controller
             ]
         }
         */
-        return "void";
+        // $restult = array();
+
+        // $dist = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $paradaId)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->select('*')->get();
+
+        // foreach ($books as $key => $value) {
+        //     $camiones = DB::table('Rutas')->where('Rutas.idRuta','=', $value->idRuta)->join('Camion','Camion.idRuta','=','Rutas.idRuta')->select('*')->get();
+        //     $value->camiones = array();
+        //     array_push($value->rutas, $camiones);
+        // }
+
+        // return json_encode($books);
+        return void;
     }
 
     public function getParadasRutasCercanas(Request $request)
@@ -196,10 +212,26 @@ class ApiController extends Controller
             “offset” int
         }
         */
+        $validator = Validator::make($request->all(), [
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+            'limit' => 'required|numeric',
+            'offset' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return "Success false";
+        }
+
         $lat = $request->lat;
         $long = $request->long;
         $limit = $request->limit;
         $offset = $request->offset;
+
+        $lat = 19.028503;
+        $lon = -98.232665;
+        $limit = 3;
+        $offset = 0;
         
         /*Respuesta
         {
@@ -221,7 +253,17 @@ class ApiController extends Controller
             ]
         }
         */
+        $restult = array();
 
-        return "void";
+        $books = DB::table('Paradas')->select(DB::raw('*,distlatlon(Paradas.lat, Paradas.long, '.$lat.','.$lon.') as dis'))->orderby('dis', 'desc')->limit($limit)->offset($offset)->get();
+
+        foreach ($books as $key => $value) {
+            $dist = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $value->idParada)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->select('*')->get();
+            $value->tiempo = $value->dis/40.0;
+            $value->rutas = array();
+            array_push($value->rutas, $dist);
+        }
+
+        return json_encode($books);
     }
 }
