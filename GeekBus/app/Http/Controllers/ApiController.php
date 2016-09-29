@@ -187,18 +187,18 @@ class ApiController extends Controller
             ]
         }
         */
-        // $restult = array();
+        $restult = array();
 
-        // $dist = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $paradaId)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->select('*')->get();
+        $books = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $paradaId)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->select('*')->get();
 
-        // foreach ($books as $key => $value) {
-        //     $camiones = DB::table('Rutas')->where('Rutas.idRuta','=', $value->idRuta)->join('Camion','Camion.idRuta','=','Rutas.idRuta')->select('*')->get();
-        //     $value->camiones = array();
-        //     array_push($value->rutas, $camiones);
-        // }
+        foreach ($books as $key => $value) {
+            $camiones = DB::table('Rutas')->where('Rutas.idRuta','=', $value->idRuta)->join('Camiones','Camiones.idRuta','=','Rutas.idRuta')->leftJoin('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select(DB::raw('*,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->orderby('dis', 'asc')->limit(1)->get();
+            $value->camiones = array();
+            array_push($value->camiones, $camiones);
+        }
+        
 
-        // return json_encode($books);
-        return void;
+        return json_encode($books);
     }
 
     public function getParadasRutasCercanas(Request $request)
@@ -255,7 +255,7 @@ class ApiController extends Controller
         */
         $restult = array();
 
-        $books = DB::table('Paradas')->select(DB::raw('*,distlatlon(Paradas.lat, Paradas.long, '.$lat.','.$lon.') as dis'))->orderby('dis', 'desc')->limit($limit)->offset($offset)->get();
+        $books = DB::table('Paradas')->select(DB::raw('*,distlatlon(Paradas.lat, Paradas.long, '.$lat.','.$lon.') as dis'))->orderby('dis', 'asc')->limit($limit)->offset($offset)->get();
 
         foreach ($books as $key => $value) {
             $dist = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $value->idParada)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->select('*')->get();
