@@ -20,7 +20,7 @@ class Rondas extends Migration
             $table->integer('idCamion')->unsigned();
             $table->foreign('idCamion')->references('idCamion')->on('Camiones')->onDelete('cascade');
             $table->dateTime('entrada');
-            $table->dateTime('salida');
+            $table->dateTime('salida')->nullable();
             $table->timestamps();
         });
     }

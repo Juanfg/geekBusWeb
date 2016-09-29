@@ -13,23 +13,30 @@ class Camion extends Model
         'rpmMax', 'velMax', 'macAddress'
         ];
 
-    public function Senial()
+    protected $primaryKey = "idCamion";
+
+    public function senial()
     {
-        return $this->hasMany('App\Senial');
+        return $this->hasOne('App\Senial', 'idSenial');
+    } 
+
+    public function rondas()
+    {
+        return $this->hasMany('App\Ronda', 'idRonda');
     }
 
-    public function Ruta()
+    public function eventos()
     {
-        return $this->hasOne('App\Ruta');
+        return $this->hasMany('App\Evento', 'idEvento');
     }
 
-    public function Ubicacion()
+    public function ubicaciones()
     {
-        return $this->hasMany('App\Ubicacion');
+        return $this->hasMany('App\Ubicacion', 'idUbicacion');
     }
 
-    public function Evento()
+    public function ruta()
     {
-        return $this->hasMany('App\Evento');
+        return $this->belongsTo('App\Ruta', 'idRuta');
     }
 }

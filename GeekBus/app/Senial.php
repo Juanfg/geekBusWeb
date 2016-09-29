@@ -8,10 +8,12 @@ class Senial extends Model
 {
     protected $table = "Seniales";
 
-    protected $fillable = ['idCamion', 'fechahora'];
+    protected $fillable = ['idSenial', 'idCamion'];
 
-    public function Camion()
+    protected $primaryKey = "idSenial";
+
+    public function camion()
     {
-         return $this->belongsTo('App\Camion');
+        return $this->belongsTo('App\Camion', 'idCamion');
     }
 }

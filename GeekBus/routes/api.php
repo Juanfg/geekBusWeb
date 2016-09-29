@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'cliente'], function () {
+Route::group(['prefix' => 'cliente', 'middleware' => 'guest'], function () {
 
     Route::get('rutas', 'ApiController@getRutas');
 

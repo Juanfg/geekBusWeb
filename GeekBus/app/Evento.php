@@ -8,20 +8,27 @@ class Evento extends Model
 {
     protected $table = "Eventos";
 
-    protected $fillable = ['idCamion', 'fechahora', 'idTipoEvento', 'valor', 'conductor'];
+    protected $fillable = ['idEvento', 'idCamion', 'fechahora', 'idTipoEvento', 'valor', 'conductor'];
 
-    public function Camion()
+    protected $primaryKey = "idEvento";
+
+    public function incidencias()
     {
-        return $this->belongsTo('Camion');
+        return $this->hasMany('App\Incidencia', 'idIncidencia');
     }
 
-    public function Conductor()
+    public function camion()
     {
-        return $this->belongsTo('Conductor');
+        return $this->belongsTo('App\Camion', 'idCamion');
     }
 
-    public function TipoEvento()
+    public function conductor()
     {
-        return $this->belongsTo('TipoEvento');
+        return $this->belongsTo('App\Conductor', 'idConductor');
+    }
+
+    public function tipoEvento()
+    {
+        return $this->belongsTo('App\TipoEvento', 'idTipoEventos');
     }
 }

@@ -8,10 +8,17 @@ class Ronda extends Model
 {
     protected $table = "Rondas";
 
-    protected $fillable = ['conductor', 'entrada', 'salida'];
+    protected $fillable = ['idRonda', 'idConductor', 'idCamion', 'entrada', 'salida'];
 
-    public function Conductor()
+    protected $primaryKey = "idRonda";
+
+    public function camion()
     {
-        return $this->belongsTo('Conductor');
+        return $this->belongsTo('App\Camion', 'idCamion');
+    }
+
+    public function conductores()
+    {
+        return $this->belongsTo('App\Conductor', 'idConductor');
     }
 }
