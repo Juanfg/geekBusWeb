@@ -78,7 +78,7 @@
                   <li class="mt">
                       <a href="index.html">
                           <i class="fa fa-dashboard"></i>
-                          <span>Autobuses</span>
+                          <span>Camiones</span>
                       </a>
                   </li>
 

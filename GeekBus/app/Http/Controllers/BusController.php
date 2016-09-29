@@ -15,7 +15,7 @@ class BusController extends Controller
      */
     public function index()
     {
-        //
+        return view("camiones.index");
     }
 
     /**

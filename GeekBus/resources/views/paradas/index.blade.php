@@ -20,8 +20,9 @@
                   </thead>
                   <tbody>
                   <tr>
-                      <td data-title="ID Ruta">AAC</td>
+                      <td data-title="ID Conductor">AAC</td>
                       <td data-title="Nombre">AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
+                      <td data-title="Actividad">AAC</td>
                       <td data-title="Acciones">
           	              <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                           <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
