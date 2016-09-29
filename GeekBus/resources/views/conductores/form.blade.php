@@ -7,6 +7,9 @@
     {!!  Form::text('loginKey'); !!}
 </div>
 <div class="form-group">
+    {!! Form::file('image') !!}
+</div>
+<div class="form-group">
     {!! Form::submit($submit_text, ['class'=>'btn primary']) !!}
 </div>
 

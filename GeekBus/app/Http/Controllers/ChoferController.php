@@ -25,7 +25,7 @@ class ChoferController extends Controller
      */
     public function create()
     {
-        //
+        return view('conductores.create');
     }
 
     /**
