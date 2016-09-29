@@ -260,25 +260,23 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assetsSidebar/js/jquery.js"></script>
-    <script src="assetsSidebar/js/jquery-1.8.3.min.js"></script>
-    <script src="assetsSidebar/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assetsSidebar/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assetsSidebar/js/jquery.scrollTo.min.js"></script>
-    <script src="assetsSidebar/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="assetsSidebar/js/jquery.sparkline.js"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/jquery.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/jquery-1.8.3.min.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/jquery.scrollTo.min.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/jquery.dcjqaccordion.2.7.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/jquery.nicescroll.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/jquery.sparkline.js') }}"></script>
 
 
     <!--common script for all pages-->
-    <script src="assetsSidebar/js/common-scripts.js"></script>
-    
-    <script type="text/javascript" src="assetsSidebar/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="assetsSidebar/js/gritter-conf.js"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/common-scripts.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/gritter/js/jquery.gritter.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/gritter-conf.js') }}"></script>
 
     <!--script for this page-->
-    <script src="assetsSidebar/js/sparkline-chart.js"></script>    
-  <script src="assetsSidebar/js/zabuto_calendar.js"></script>  
-  
+    <script src="{{ URL::asset('assetsSidebar/js/sparkline-chart.js') }}"></script>
+    <script src="{{ URL::asset('assetsSidebar/js/zabuto_calendar.js') }}"></script>
   
   <script type="application/javascript">
         $(document).ready(function () {
