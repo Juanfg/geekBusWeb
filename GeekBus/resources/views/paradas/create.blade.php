@@ -25,7 +25,7 @@
     </div>
 @endif
 
-<h2> Crear paradas </h2>
+<h2> Agregar una paradas </h2>
 <p> Aqu&iacute; podr&aacute;s crear paradas </p>
 
 

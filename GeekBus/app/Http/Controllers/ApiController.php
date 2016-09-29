@@ -93,9 +93,18 @@ class ApiController extends Controller
         */
 
 
-        // $respuesta = json_encode($assoc);
+        $restult = array();
 
-        return void; 
+        $books = DB::table('Rutas')->where('Rutas.idRuta','=', $rutaId)->join('ParadaCamiones','ParadaCamiones.idRuta','=','Rutas.idRuta')->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->select('*')->get();
+
+        foreach ($books as $key => $value) {
+            $camiones = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $value->idParada)->join('Ruta','Ruta.idRuta','=','Rutas.idRuta')->leftJoin('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select(DB::raw('*,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->orderby('dis', 'asc')->limit(1)->get();
+            $value->camiones = array();
+            array_push($value->camiones, $camiones);
+        }
+        
+
+        return json_encode($books); 
     }
 
     public function getParadas($request)
@@ -260,8 +269,7 @@ class ApiController extends Controller
         foreach ($books as $key => $value) {
             $dist = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $value->idParada)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->select('*')->get();
             $value->tiempo = $value->dis/40.0;
-            $value->rutas = array();
-            array_push($value->rutas, $dist);
+            $value->rutas = $dist;
         }
 
         return json_encode($books);

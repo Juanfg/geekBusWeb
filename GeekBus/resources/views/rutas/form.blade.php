@@ -3,8 +3,8 @@
     {!!  Form::text('nombre'); !!}
 </div>
 <div class="form-group">
-   {!! Form::label('loginKey', 'Descripción:'); !!}
-    {!!  Form::text('loginKey'); !!}
+   {!! Form::label('descripcion', 'Descripción:'); !!}
+    {!!  Form::text('descripcion'); !!}
 </div>
 <div class="form-group">
     {!! Form::submit($submit_text, ['class'=>'btn primary']) !!}
