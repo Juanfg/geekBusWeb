@@ -35,5 +35,5 @@ Route::group(['middleware'=>'auth'], function(){
 Auth::routes();
 
 Route::get('test',function(){
-	return view('layouts.contentDashboard');
+	return view('paradas.index');
 });
