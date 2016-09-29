@@ -38,27 +38,24 @@ class ChoferController extends Controller
     public function store(Request $request)
     {
         $message = "";
-        do{
-            $this->validate($request,[
-                "nombre" => "required|string",
-                "loginKey" => "required|string",
-                "image" => "required|image",
-            ]);
+        $this->validate($request,[
+            "nombre" => "required|string",
+            "loginKey" => "required|string",
+            "image" => "required|image",
+        ]);
 
-            $path = $request->image->store('images');
+        $path = $request->image->store('images');
 
-            $alreadyExists = Conductor::where("loginKey",$request->loginKey)->count();
+        $alreadyExists = Conductor::where("loginKey",$request->loginKey)->count();
 
-            if($alreadyExists == 0){
-                //no existe
-                Conductor::create(["nombre"=>$request->nombre, "loginKey"=>$request->loginKey, "fotoPath"=>$path]);
-            }else{
-                //existe
-                $request->session()->flash('error', "La llave ya esta en uso. Es muy importante que sea &uacute;nica");
-                return back()->withInput();
-            }
-
-        }while(false);
+        if($alreadyExists == 0){
+            //no existe
+            Conductor::create(["nombre"=>$request->nombre, "loginKey"=>$request->loginKey, "fotoPath"=>$path]);
+        }else{
+            //existe
+            $request->session()->flash('error', "La llave ya esta en uso. Es muy importante que sea &uacute;nica");
+            return back()->withInput();
+        }
 
         $request->session()->flash("message", "Creado con exito");
         return redirect()->route("choferes.create");

@@ -38,25 +38,22 @@ class ParadaController extends Controller
     public function store(Request $request)
     {
         $message = "";
-        do{
-            $this->validate($request,[
-                "nombre" => "required|string",
-                "lat" => "required|numeric",
-                "long" => "required|numeric",
-            ]);
+        $this->validate($request,[
+            "nombre" => "required|string",
+            "lat" => "required|numeric",
+            "long" => "required|numeric",
+        ]);
 
-            $alreadyExists = Parada::where("nombre",$request->nombre)->count();
+        $alreadyExists = Parada::where("nombre",$request->nombre)->count();
 
-            if($alreadyExists == 0){
-                //no existe
-                Parada::create(["nombre"=>$request->nombre, "lat"=>$request->lat, "long"=>$request->long]);
-            }else{
-                //existe
-                $request->session()->flash("ERROR", "Ya existe la parada");
-                return back()->withInput();
-            }
-
-        }while(false);
+        if($alreadyExists == 0){
+            //no existe
+            Parada::create(["nombre"=>$request->nombre, "lat"=>$request->lat, "long"=>$request->long]);
+        }else{
+            //existe
+            $request->session()->flash("error", "Ya existe la parada");
+            return back()->withInput();
+        }
 
         $request->session()->flash("message", "Parada creada con exito");
         return redirect()->route("paradas.create");
