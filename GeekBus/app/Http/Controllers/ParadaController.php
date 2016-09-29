@@ -81,7 +81,8 @@ class ParadaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $toEdit = Parada::where("idParada",$id)->firstorfail();
+        return view("paradas.edit",["parada"=>$toEdit]);
     }
 
     /**
@@ -93,7 +94,18 @@ class ParadaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate([$validate,
+            "nombre" => "required|string",
+            "lat" => "required|numeric",
+            "long" => "required|numeric",
+        ]);
+
+        $toEdit = Parada::where("idParada",$id)->firstorfail();
+
+        $toEdit->update(["nombre"=>$request->nombre,"lat"=>$request->lat,"long"=>$request->long]);
+
+        $Request->session()->flash("message", "Parada actualizada con exito");
+        return redirect()->route("paradas.update");
     }
 
     /**
