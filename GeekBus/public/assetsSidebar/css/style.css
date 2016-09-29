@@ -2240,4 +2240,8 @@ label {
     min-height: 900px;
 }
 
+.extraMargin{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 

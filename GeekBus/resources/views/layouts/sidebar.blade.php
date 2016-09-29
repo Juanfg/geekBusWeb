@@ -116,7 +116,7 @@
           <section class="wrapper">
 
               <div class="row">
-                  <div class="col-lg-9 main-chart">
+                  <div class="col-lg-9 col-xs-12 main-chart">
                   @yield('content')
                   </div><!-- /col-lg-9 END SECTION MIDDLE -->
                   
@@ -125,7 +125,7 @@
       RIGHT SIDEBAR CONTENT
       *********************************************************************************************************************************************************** -->                  
                   
-                  <div class="col-lg-3 ds">
+                  <div class="col-lg-3 hidden-sm hidden-xs hidden-md ds">
                     <!--COMPLETED ACTIONS DONUTS CHART-->
                     <h3>NOTIFICACIONES</h3>
                                         
@@ -245,7 +245,7 @@
 
                       
                   </div><!-- /col-lg-3 -->
-              </div><! --/row -->
+              </div>
           </section>
       </section>
 

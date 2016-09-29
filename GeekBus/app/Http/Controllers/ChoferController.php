@@ -44,7 +44,7 @@ class ChoferController extends Controller
             "image" => "required|image",
         ]);
 
-        $path = $request->image->store('images');
+        $path = $request->image->store('public');
 
         $alreadyExists = Conductor::where("loginKey",$request->loginKey)->count();
 
@@ -107,7 +107,7 @@ class ChoferController extends Controller
             $updating = $request->all();
 
             if ($request->hasFile('image')){
-                $updating['fotoPath'] = $request->image->store("");
+                $updating['fotoPath'] = $request->image->store("public");
             }
             
             $alreadyExists = Conductor::where("loginKey",$request->loginKey)->where('idConductor', '<>' ,$id)->count();
