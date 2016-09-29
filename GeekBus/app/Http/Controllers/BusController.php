@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Ruta;
+use App\Camion;
 
 class BusController extends Controller
 {
@@ -38,14 +40,27 @@ class BusController extends Controller
     {
         //ruta,unidad,asientos,capacidad,rpm,vel,mac;
         $this->validate($request,[
-            "ruta" => "required",
-            "unidad" => "required",
-            "asientos" => "required",
-            "capacidad" => "required",
-            "rpm" => "required",
-            "vel" => "required",
-            "mac" => "required",
+            "idRuta" => "required",
+            "unidad" => "required|numeric",
+            "asientos" => "required|numeric",
+            "capacidadMaxima" => "required|numeric",
+            "rpmMax" => "required|numeric",
+            "velMax" => "required|numeric",
+            "macAdress" => "required|string",
         ]);
+
+        Ruta::where("idRuta",$request->ruta)->firstorfail();
+
+        $alreadyExists = Camion::where("unidad",$request->unidad)->count();
+        if($alreadyExists == 0){
+            Camion::create($request->all());
+        }else{
+            $request->session()->flash("error","Ya existe esta unidad registrada");
+            return back()->withInput();
+        }
+
+        $request->session()->flash("message","Unidad creada y asignada con exito");
+        return redirect()->route("camiones.create");
     }
 
     /**
@@ -56,7 +71,8 @@ class BusController extends Controller
      */
     public function show($id)
     {
-        //
+        $camion = Camion::where('idCamion',$id)->firstorfail();
+        return view("camiones.show",["conductor" => $camion]);
     }
 
     /**
@@ -67,7 +83,8 @@ class BusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $toEdit = Camion::where("idCamion",$id)->firstorfail();
+        return view("camiones.edit",["camion"=>$toEdit]);
     }
 
     /**
@@ -79,7 +96,21 @@ class BusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            "unidad" => "required|numeric",
+            "asientos" => "required|numeric",
+            "capacidadMaxima" => "required|numeric",
+            "rpmMax" => "required|numeric",
+            "velMax" => "required|numeric",
+            "macAdress" => "required|string",
+        ]);
+
+        $toEdit = Camion::where("idCamion",$id)->firstorfail();
+
+        $toEdit = update($request->all());
+
+        $request->session()->flash("message","Unidad actualizada con exito");
+        return redirect()->route("camion.show",[$id]);
     }
 
     /**
