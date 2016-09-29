@@ -45,11 +45,13 @@ class ChoferController extends Controller
                 "image" => "required|image",
             ]);
 
+            $path = $request->image->store('images');
+
             $alreadyExists = Conductor::where("loginKey",$request->loginKey)->count();
 
             if($alreadyExists == 0){
                 //no existe
-                Conductor::create(["nombre"=>$request->nombre, "loginKey"=>$request->loginKey, "fotoPath"=>$request->fotoPath]);
+                Conductor::create(["nombre"=>$request->nombre, "loginKey"=>$request->loginKey, "fotoPath"=>$path]);
             }else{
                 //existe
                 return back()->withInput()->flash("ERROR", "Ya existe el conductor");
@@ -57,6 +59,7 @@ class ChoferController extends Controller
 
         }while(false)
 
+        return redirect()->route("choferes.create")->flash("message", "creato con exito");
     }
 
     /**
