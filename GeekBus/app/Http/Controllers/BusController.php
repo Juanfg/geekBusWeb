@@ -25,7 +25,7 @@ class BusController extends Controller
      */
     public function create()
     {
-        //
+        return view("camiones.create");
     }
 
     /**
@@ -36,7 +36,16 @@ class BusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //ruta,unidad,asientos,capacidad,rpm,vel,mac;
+        this->validate($request,[
+            "ruta" => "required",
+            "unidad" => "required",
+            "asientos" => "required",
+            "capacidad" => "required",
+            "rpm" => "required",
+            "vel" => "required",
+            "mac" => "required",
+        ]);
     }
 
     /**
