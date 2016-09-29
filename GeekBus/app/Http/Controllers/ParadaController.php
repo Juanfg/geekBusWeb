@@ -105,7 +105,7 @@ class ParadaController extends Controller
         $toEdit->update(["nombre"=>$request->nombre,"lat"=>$request->lat,"long"=>$request->long]);
 
         $Request->session()->flash("message", "Parada actualizada con exito");
-        return redirect()->route("paradas.update");
+        return redirect()->route("paradas.show");
     }
 
     /**
