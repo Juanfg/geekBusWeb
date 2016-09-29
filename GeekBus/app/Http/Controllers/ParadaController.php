@@ -102,10 +102,10 @@ class ParadaController extends Controller
 
         $toEdit = Parada::where("idParada",$id)->firstorfail();
 
-        $toEdit->update(["nombre"=>$request->nombre,"lat"=>$request->lat,"long"=>$request->long]);
+        $toEdit->update($request->all());
 
         $Request->session()->flash("message", "Parada actualizada con exito");
-        return redirect()->route("paradas.show");
+        return redirect()->route("paradas.show",[$id]);
     }
 
     /**
