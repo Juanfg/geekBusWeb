@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Conductor;
+use App\Ruta;
 
 class RaspBerry extends Controller
 {
@@ -26,9 +28,16 @@ class RaspBerry extends Controller
             ::success?%b
             ::auth?%d
         */
-        $success = true;
-        $auth = 123;
 
+        $conductor = Conductor::where("loginkey",$chofer);
+        if($conductor==null){
+            $success = false;
+            $auth = null;
+        }else{
+            
+            $success = true;
+        }
+        
         $assoc = array("success"=>$success,"auth"=>$auth);
         $respuesta = json_encode($assoc);
         return $respuesta;
