@@ -71,7 +71,8 @@ class BusController extends Controller
      */
     public function show($id)
     {
-        //
+        $camion = Camion::where('idCamion',$id)->firstorfail();
+        return view("camiones.show",["conductor" => $camion]);
     }
 
     /**
