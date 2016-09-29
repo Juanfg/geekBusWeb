@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
     	$this->call(SeedParadaCamiones::class);
     	$this->call(SeedEventos::class);
     	$this->call(SeedIncidencias::class);
-    	$this->call(SeedProcedure::class);
 	    $this->call(SeedUsers::class);
 	  	
 	    /*

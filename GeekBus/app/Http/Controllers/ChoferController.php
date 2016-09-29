@@ -72,7 +72,7 @@ class ChoferController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -83,7 +83,8 @@ class ChoferController extends Controller
      */
     public function edit($id)
     {
-        //
+        $conductor = Conductor::where('idConductor', 2)->firstOrFail();
+        return view('conductores.editar', ['conductor' => $conductor]);
     }
 
     /**
