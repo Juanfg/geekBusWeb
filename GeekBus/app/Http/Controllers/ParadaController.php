@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Parada;
 
 class ParadaController extends Controller
 {
@@ -36,7 +37,29 @@ class ParadaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = "";
+        do{
+            $this->validate($request,[
+                "nombre" => "required|string",
+                "lat" => "required|numeric",
+                "long" => "required|numeric",
+            ]);
+
+            $alreadyExists = Parada::where("nombre",$request->nombre)->count();
+
+            if($alreadyExists == 0){
+                //no existe
+                Parada::create(["nombre"=>$request->nombre, "lat"=>$request->lat, "long"=>$request->long]);
+            }else{
+                //existe
+                $Request->session()->flash("ERROR", "Ya existe la parada");
+                return back()->withInput();
+            }
+
+        }while(false)
+
+        $Request->session()->flash("message", "Parada creada con exito");
+        return redirect()->route("paradas.create");
     }
 
     /**

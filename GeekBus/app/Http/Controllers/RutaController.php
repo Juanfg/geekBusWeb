@@ -15,7 +15,7 @@ class RutaController extends Controller
      */
     public function index()
     {
-        //
+        return view("rutas.index");
     }
 
     /**
