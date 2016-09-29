@@ -67,7 +67,8 @@ class ParadaController extends Controller
      */
     public function show($id)
     {
-        //
+        $parada = Parada::where('idParada', $id)->firstOrFail();
+        return view('paradas.show', ['parada' => $parada]);
     }
 
     /**
@@ -78,8 +79,8 @@ class ParadaController extends Controller
      */
     public function edit($id)
     {
-        $toEdit = Parada::where("idParada",$id)->firstorfail();
-        return view("paradas.edit",["parada"=>$toEdit]);
+        $parada = Parada::where("idParada",$id)->firstorfail();
+        return view("paradas.editar",["parada"=>$parada]);
     }
 
     /**
@@ -91,17 +92,17 @@ class ParadaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate([$validate,
+        $this->validate($request,[
             "nombre" => "required|string",
             "lat" => "required|numeric",
             "long" => "required|numeric",
         ]);
 
-        $toEdit = Parada::where("idParada",$id)->firstorfail();
+        $parada = Parada::where("idParada",$id)->firstorfail();
 
-        $toEdit->update($request->all());
+        $parada->update($request->all());
 
-        $Request->session()->flash("message", "Parada actualizada con exito");
+        $request->session()->flash("message", "Parada actualizada con exito");
         return redirect()->route("paradas.show",[$id]);
     }
 
