@@ -26,7 +26,7 @@ class ChoferController extends Controller
      */
     public function create()
     {
-        //
+        return view('conductores.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ChoferController extends Controller
         $message = "";
         do{
             $this->validate($request,[
-                "name" => "required|string",
+                "nombre" => "required|string",
                 "loginKey" => "required|string",
                 "image" => "required|image",
             ]);
@@ -54,12 +54,14 @@ class ChoferController extends Controller
                 Conductor::create(["nombre"=>$request->nombre, "loginKey"=>$request->loginKey, "fotoPath"=>$path]);
             }else{
                 //existe
-                return back()->withInput()->flash("ERROR", "Ya existe el conductor");
+                $request->session()->flash('error', "La llave ya esta en uso. Es muy importante que sea &uacute;nica");
+                return back()->withInput();
             }
 
-        }while(false)
+        }while(false);
 
-        return redirect()->route("choferes.create")->flash("message", "creato con exito");
+        $request->session()->flash("message", "Creado con exito");
+        return redirect()->route("choferes.create");
     }
 
     /**
@@ -70,7 +72,7 @@ class ChoferController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -81,7 +83,8 @@ class ChoferController extends Controller
      */
     public function edit($id)
     {
-        //
+        $conductor = Conductor::where('idConductor', 2)->firstOrFail();
+        return view('conductores.editar', ['conductor' => $conductor]);
     }
 
     /**

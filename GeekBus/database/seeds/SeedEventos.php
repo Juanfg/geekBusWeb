@@ -14,10 +14,10 @@ class SeedEventos extends Seeder
         DB::table('Eventos')->insert([
             'idEvento' => 4,
             'idCamion' => 2,
-            'fechahora' => 2016-09-28 14:12:36,
+            'fechahora' => '2016-09-28 14:12:36',
             'idTipoEvento' => 2,
             'valor' => 6,
-            'idConductor' => 5,
+            'conductor' => 5,
         ]);
     }
 }

@@ -16,7 +16,7 @@ class ParadaController extends Controller
      */
     public function index()
     {
-        //
+        return view('paradas.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class ParadaController extends Controller
      */
     public function create()
     {
-        //
+        return view('paradas.create');
     }
 
     /**
@@ -52,13 +52,13 @@ class ParadaController extends Controller
                 Parada::create(["nombre"=>$request->nombre, "lat"=>$request->lat, "long"=>$request->long]);
             }else{
                 //existe
-                $Request->session()->flash("ERROR", "Ya existe la parada");
+                $request->session()->flash("ERROR", "Ya existe la parada");
                 return back()->withInput();
             }
 
-        }while(false)
+        }while(false);
 
-        $Request->session()->flash("message", "Parada creada con exito");
+        $request->session()->flash("message", "Parada creada con exito");
         return redirect()->route("paradas.create");
     }
 
@@ -81,7 +81,8 @@ class ParadaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $toEdit = Parada::where("idParada",$id)->firstorfail();
+        return view("paradas.edit",["parada"=>$toEdit]);
     }
 
     /**
@@ -93,7 +94,18 @@ class ParadaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate([$validate,
+            "nombre" => "required|string",
+            "lat" => "required|numeric",
+            "long" => "required|numeric",
+        ]);
+
+        $toEdit = Parada::where("idParada",$id)->firstorfail();
+
+        $toEdit->update(["nombre"=>$request->nombre,"lat"=>$request->lat,"long"=>$request->long]);
+
+        $Request->session()->flash("message", "Parada actualizada con exito");
+        return redirect()->route("paradas.update");
     }
 
     /**
