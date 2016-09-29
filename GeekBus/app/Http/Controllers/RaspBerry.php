@@ -12,6 +12,9 @@ use App\Ruta;
 use App\Ronda;
 use App\Camion;
 use App\Ubicacion;
+use App\TipoEvento;
+use App\Evento;
+use App\Senial;
 
 class RaspBerry extends Controller
 {
@@ -52,8 +55,14 @@ class RaspBerry extends Controller
             }
             
             // Cerramos la sesion si hubiera una abierta
-            Ronda::where('idCamion', $camion->idCamion)->where("salida", null)->update(['salida' => Carbon::now()]);
+            $closed = Ronda::where('idCamion', $camion->idCamion)->where("salida", null)->update(['salida' => Carbon::now()]);
             
+            //Si no cerramos sesion entonces generamos evento de encendido
+            if($closed == 0){
+                Evento::create(['idCamion'=>$camion->idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$encendido,'valor'=>-1, 'conductor'=>$conductor->idConductor]);
+
+            }
+
             // Abrimos la sesion nueva
             $ronda = Ronda::create(['idConductor'=>$conductor->idConductor, 'idCamion'=>$camion->idCamion,'entrada'=>Carbon::now()]);
             if($ronda == null){
@@ -61,9 +70,14 @@ class RaspBerry extends Controller
                 break;
             }
             
+            // Creamos la senial que verificara que el camion siga en linea
+            $senial = Senial::firstOrNew(['idCamion'=>$camion->idCamion]);
+            $senial->modificadoEn = Carbon::now();
+            $senial->save();
+
             $success = true;
             $auth = $conductor->idConductor;
-            
+
         } while (false);
              
         $assoc = array("success"=>$success,"auth"=>$auth, "message" => $message);
@@ -108,8 +122,19 @@ class RaspBerry extends Controller
                 break;
             }
             
-            Ubicacion::create(['idCamion'=>$rondaAbierta->idCamion, 'fechahora'=>Carbon::now(), 'lat'=>$lat, 'long'=>$long]);
-            
+            $idCamion = $rondaAbierta->idCamion;
+
+            Ubicacion::create(['idCamion'=>$idCamion, 'fechahora'=>Carbon::now(), 'lat'=>$lat, 'long'=>$long]);
+            Evento::create(['idCamion'=>$idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$rpm,'valor'=>$rpm, 'conductor'=>$auth]);
+            Evento::create(['idCamion'=>$idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$pasajeros,'valor'=>$pasajeros, 'conductor'=>$auth]);
+            Evento::create(['idCamion'=>$idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$temperatura,'valor'=>$temp, 'conductor'=>$auth]);
+            Evento::create(['idCamion'=>$idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$velocidad,'valor'=>$velocidad, 'conductor'=>$auth]);
+
+            //Actualizmos la senial para que no genere evento de desconexion
+            $senial = Senial::firstOrNew(['idCamion'=>$idCamion]);
+            $senial->modificadoEn = Carbon::now();
+            $senial->save();
+
             $success = true;
             
        }while(false);
@@ -136,13 +161,28 @@ class RaspBerry extends Controller
             }
             
             $auth = $request->auth;
-            
-            $rondaAbierta = Ronda::where('idConductor', $auth)->where("salida", null)->update(['salida' => Carbon::now()]);
-            $success = $rondaAbierta != 0;
-            
-            if(!$success)
+
+            $rondaAbierta = Ronda::where('idConductor', $auth)->where("salida", null)->first();
+
+            if($rondaAbierta == null){
                 $message = "Not logged";
-            
+                break;
+            }
+
+            // Creamos el evento
+            Evento::create(['idCamion'=>$rondaAbierta->idCamion,'fechahora'=>Carbon::now(), 'idTipoEvento'=>TipoEvento::$apagado,'valor'=>-1, 'conductor'=>$auth]);
+
+
+            $senial = Senial::where(['idCamion'=>$rondaAbierta->idCamion])->first();
+
+            if($senial != null)
+                $senial->delete();
+
+            // Cerramos la sesion abierta
+            Ronda::where('idConductor', $auth)->where("salida", null)->update(['salida' => Carbon::now()]);
+           
+            $success = true;
+
         }while(false);
       
         $assoc = array("success"=>$success, "message"=>$message);

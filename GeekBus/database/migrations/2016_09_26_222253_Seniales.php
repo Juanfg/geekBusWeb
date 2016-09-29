@@ -17,6 +17,7 @@ class Seniales extends Migration
             $table->increments('idSenial');
             $table->integer('idCamion')->unsigned();
             $table->foreign('idCamion')->references('idCamion')->on('Camiones')->onDelete('cascade');
+            $table->datetime('modificadoEn')->default('2016-9-29 00:00:00');
             $table->timestamps();
         });
     }

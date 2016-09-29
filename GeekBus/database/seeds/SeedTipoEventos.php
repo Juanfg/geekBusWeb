@@ -12,8 +12,28 @@ class SeedTipoEventos extends Seeder
     public function run()
     {
         DB::table('TipoEventos')->insert([
-            'idTipoEvento' => 7,
-            'descrpcion' => str_random (30),
+            'idTipoEvento' => 1,
+            'descripcion' => "Encendido",
+        ]);
+        DB::table('TipoEventos')->insert([
+            'idTipoEvento' => 2,
+            'descripcion' => "Apagado",
+        ]);
+        DB::table('TipoEventos')->insert([
+            'idTipoEvento' => 3,
+            'descripcion' => "Revoluciones por minuto",
+        ]);
+        DB::table('TipoEventos')->insert([
+            'idTipoEvento' => 4,
+            'descripcion' => "Cantidad de pasajeros",
+        ]);
+        DB::table('TipoEventos')->insert([
+            'idTipoEvento' => 5,
+            'descripcion' => "Temperatura del motor",
+        ]);
+        DB::table('TipoEventos')->insert([
+            'idTipoEvento' => 6,
+            'descripcion' => "Velocidad",
         ]);
     }
 }

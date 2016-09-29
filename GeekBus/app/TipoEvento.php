@@ -16,4 +16,13 @@ class TipoEvento extends Model
     {
         return $this->hasMany('App\Evento', 'idEvento');
     }
+
+    // A partir de aqui se hard-codean los valores de los posibles eventos para realizar queries
+
+    static $encendido = 1;
+    static $apagado = 2;
+    static $rpm = 3;
+    static $pasajeros = 4;
+    static $temperatura = 5;
+    static $velocidad = 6;
 }
