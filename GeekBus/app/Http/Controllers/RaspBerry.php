@@ -45,7 +45,7 @@ class RaspBerry extends Controller
             $camion = Camion::where("macAddress", $camionKey)->first();
 
             if($conductor == null || $camion == null){
-                $message = "Invalid parameter " . $conductor;
+                $message = "Invalid parameter";
                 break;
             }
             
