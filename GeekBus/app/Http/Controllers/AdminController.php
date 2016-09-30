@@ -19,84 +19,25 @@ class AdminController extends Controller
         return view('admin.index', ['admin'=>User::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request,[
-            "name" => "required|string",
-            "email" => "required|string",
-            "password" => "required|string",
-        ]);
-
-        $alreadyExists = User::where("email",$request->email)->firstorfail();
-        if($alreadyExist == 0){
-            User::create($request->all());
-        }else{
-            $request->session()->flash("error","Ya existe ese usuario");
-            return back()->withInput();
-        }
-
-        $request->session()->flash("message","Usuario registrado don exito");
-        return redirect()->route("admins.create");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $number = User::all()->count();
+
+        if($number<2){
+            $request->session()->flash("failDeleted", "Muy pocos usuarios, no es posible eliminar");
+            return redirect()->route("admins.index");
+        }
+
+        $userToEliminate = User::where("id",$id)->firstorfail();
+        $deleted = $userToEliminate->delete();
+
+        if($deleted){
+            $request->session()->flash("deleted","Eliminado con &eacute;xito");
+        }
+        else{
+            $request->session()->flash("failDeleted", "Algo sali&oacute; mal. Por favor contacta a desarrador.");
+        }
+
+        return redirect()->route("admins.index");
     }
 }
