@@ -64,7 +64,8 @@ class RutaController extends Controller
      */
     public function show($id)
     {
-        //
+        $ruta = Ruta::where('idRuta', $id)->firstOrFail();
+        return view('rutas.show', ['ruta' => $ruta]);
     }
 
     /**
@@ -75,7 +76,8 @@ class RutaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ruta = Ruta::where("idRuta",$id)->firstorfail();
+        return view("rutas.editar",["ruta"=>$ruta]);
     }
 
     /**
@@ -87,7 +89,17 @@ class RutaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            "nombre" => "required|string",
+            "descripcion" => "required|string",
+        ]);
+
+        $ruta = Ruta::where("idRuta",$id)->firstorfail();
+
+        $ruta->update($request->all());
+
+        $request->session()->flash("message", "Ruta actualizada con exito");
+        return redirect()->route("rutas.show",[$id]);
     }
 
     /**

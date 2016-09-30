@@ -1,6 +1,6 @@
 @extends('layouts.sidebar')
 
-@section('title', 'Paradas')
+@section('title', 'Rutas')
 
 @section('content')
 
@@ -20,16 +20,17 @@
     </div>
 @endif
 
-<h2> Editar paradas </h2>
-<p> Aqu&iacute; podr&aacute;s editar una parada.</p>
+<h2> Editar rutas </h2>
+<p> Aqu&iacute; podr&aacute;s editar a un rutas.</p>
 
 
 <div class="col-sm-12"> 
-{!! Form::model($parada,
+{!! Form::model($ruta,
     [
     'method' => 'PUT',
-    'route' =>['paradas.update', $parada->idParada]
+    'route' =>['rutas.update', $ruta->idRuta], 
+    'files' => 'true'
     ]) !!}
-@include('paradas.form', ['submit_text' => 'Editar'])
+@include('rutas.form', ['submit_text' => 'Editar'])
 </div>
 @endsection

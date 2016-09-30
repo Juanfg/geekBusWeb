@@ -72,7 +72,7 @@ class BusController extends Controller
     public function show($id)
     {
         $camion = Camion::where('idCamion',$id)->firstorfail();
-        return view("camiones.show",["conductor" => $camion]);
+        return view("camiones.show",["camion" => $camion]);
     }
 
     /**
@@ -107,7 +107,7 @@ class BusController extends Controller
 
         $toEdit = Camion::where("idCamion",$id)->firstorfail();
 
-        $toEdit = update($request->all());
+        $toEdit->update($request->all());
 
         $request->session()->flash("message","Unidad actualizada con exito");
         return redirect()->route("camion.show",[$id]);
