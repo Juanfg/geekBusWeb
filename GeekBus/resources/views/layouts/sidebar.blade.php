@@ -54,46 +54,40 @@
 
                   <li class="mt">
                       <a href="{{route('autobuses.index')}}">
-                          <i class="fa fa-dashboard" ></i>
+                          <i class="fa fa-truck" ></i>
                           <span>Camiones</span>
                       </a>
                   </li>
 
                   <li class="mt">
                       <a href="{{route('choferes.index')}}">
-                          <i class="fa fa-dashboard"></i>
+                          <i class="fa fa-user"></i>
                           <span>Choferes</span>
                       </a>
                   </li>
 
                   <li class="mt">
                       <a href="{{route('rutas.index')}}">
-                          <i class="fa fa-dashboard"></i>
+                          <i class="fa fa-map"></i>
                           <span>Rutas</span>
                       </a>
                   </li>
 
                   <li class="mt">
                       <a href="{{route('paradas.index')}}">
-                          <i class="fa fa-dashboard"></i>
+                          <i class="fa fa-hand-paper-o"></i>
                           <span>Paradas</span>
                       </a>
                   </li>
                   <li class="mt">
-                      <a href="#">
-                          <i class="fa fa-dashboard"></i>
+                      <a href="{{route('admins.index')}}">
+                          <i class="fa fa-user-plus"></i>
                           <span>Administradores</span>
-                      </a>
-                  </li>
-                   <li class="mt">
-                      <a href="#">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Estad&iacute;sticas</span>
                       </a>
                   </li>
                   <li class="mt">
                       <a href="{{route('incidencias.index')}}">
-                          <i class="fa fa-dashboard"></i>
+                          <i class="fa fa-exclamation-triangle"></i>
                           <span>Incidencias</span>
                       </a>
                   </li>
