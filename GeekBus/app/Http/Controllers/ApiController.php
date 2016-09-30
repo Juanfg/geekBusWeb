@@ -98,7 +98,7 @@ class ApiController extends Controller
         $books = DB::table('Rutas')->where('Rutas.idRuta','=', $rutaId)->join('ParadaCamiones','ParadaCamiones.idRuta','=','Rutas.idRuta')->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->select('*')->get();
 
         foreach ($books as $key => $value) {
-            $camiones = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $value->idParada)->join('Ruta','Ruta.idRuta','=','Rutas.idRuta')->leftJoin('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select(DB::raw('*,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->orderby('dis', 'asc')->limit(1)->get();
+            $camiones = DB::table('ParadaCamiones')->where([['ParadaCamiones.idParada','=', 1], ['Eventos.idTipoEvento','=', 7]])->join('Rutas','Rutas.idRuta','=','Rutas.idRuta')->leftJoin('Camiones','Camiones.idRuta','=','Rutas.idRuta')->join('Eventos','Eventos.idCamion','=','Camiones.idCamion')->select('Camiones.idCamion', 'Eventos.idTipoEvento')->distinct()->orderBy('Eventos.fechahora')->get();
             $value->camiones = array();
             array_push($value->camiones, $camiones);
         }
@@ -198,12 +198,16 @@ class ApiController extends Controller
         */
         $restult = array();
 
-        $books = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $paradaId)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->select('*')->get();
+        $books = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $paradaId)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->get();
 
         foreach ($books as $key => $value) {
-            $camiones = DB::table('Rutas')->where('Rutas.idRuta','=', $value->idRuta)->join('Camiones','Camiones.idRuta','=','Rutas.idRuta')->leftJoin('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select(DB::raw('*,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->orderby('dis', 'asc')->limit(1)->get();
-            $value->camiones = array();
-            array_push($value->camiones, $camiones);
+            $camiones = DB::table('Rutas')->where('Rutas.idRuta','=', $value->idRuta)->join('Camiones','Camiones.idRuta','=','Rutas.idRuta')->leftJoin('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select(DB::raw('Camiones.idCamion,Camiones.idRuta, Rutas.nombre,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->orderby('dis', 'asc')->get();
+            $value->camiones = $camiones;
+            foreach ($camiones as $key => $valuec){
+                $paradas = DB::table('Camiones')->where('Camiones.idCamion','=', $valuec->idCamion)->join('Rutas','Rutas.idRuta','=','Camiones.idRuta')->join('ParadaCamiones','ParadaCamiones.idRuta','=','Rutas.idRuta')->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->select('Paradas.idParada', 'Paradas.Nombre', 'Paradas.lat', 'Paradas.long')->get();
+                $valuec->tiempo = $valuec->dis/666.6667;
+                $valuec->paradas = $paradas;
+            }
         }
         
 
@@ -268,7 +272,7 @@ class ApiController extends Controller
 
         foreach ($books as $key => $value) {
             $dist = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $value->idParada)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->select('*')->get();
-            $value->tiempo = $value->dis/40.0;
+            $value->tiempo = $value->dis/666.6667;
             $value->rutas = $dist;
         }
 

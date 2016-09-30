@@ -12,6 +12,16 @@ class SeedCamiones extends Seeder
     public function run()
     {
         DB::table('Camiones')->insert([
+            'idCamion' => 1,
+            'idRuta'=> 3,
+            'unidad' => 10,
+            'asientos' => 26,
+            'capacidadMaxima' => 24,
+            'rpmMax' => rand(1,7000),
+            'velMax' => rand(1,80),
+            'macAddress' => str_random(254),
+        ]);
+        DB::table('Camiones')->insert([
         	'idCamion' => 2,
             'idRuta'=> 3,
             'unidad' => 8,
@@ -19,7 +29,7 @@ class SeedCamiones extends Seeder
             'capacidadMaxima' => 45,
             'rpmMax' => rand(1,7000),
             'velMax' => rand(1,80),
-            'macAddress' => "RKYjcZWezDBoed2j0LbuwAIyJqjTkVe7ObtXt77C4nwzgL7oEOqgo3CMRJKsIOXCMzv4txVox8FnGIIVuRiSwqGrTjidQ1X1cOak4hQGDAe4gzvKfELOEFlz0zRxQNuzNEs3nCWTnaF09WC5o5JmizKV88v8DIKC3TQZv3BYWfYI1c363Fn27j5scV7FlthLwO95xSGW2CRt9twAtY0ieMa3d43TEmlBrpQDrMY94apuL6luiQ4WKuawRsQ3BK",
+            'macAddress' => "RKYjcZWezDBoed2j0LbuwAIyJqjTkVe7ObtXt77C4",
         ]);
         DB::table('Camiones')->insert([
             'idCamion' => 3,
@@ -32,7 +42,7 @@ class SeedCamiones extends Seeder
             'macAddress' => 202481601069115,
         ]);
         DB::table('Camiones')->insert([
-            'idCamion' => 1,
+            'idCamion' => 4,
             'idRuta'=> 3,
             'unidad' => 10,
             'asientos' => 26,

@@ -11,8 +11,28 @@ class SeedRutas extends Seeder
      */
     public function run()
     {
-       DB::table('Rutas')->insert([
+        DB::table('Rutas')->insert([
+            'idRuta'=> 1,
+            'nombre' => str_random(30),
+            'descripcion' => str_random(225) ,
+        ]);
+        DB::table('Rutas')->insert([
+            'idRuta'=> 2,
+            'nombre' => str_random(30),
+            'descripcion' => str_random(225) ,
+        ]);
+        DB::table('Rutas')->insert([
        	    'idRuta'=> 3,
+            'nombre' => str_random(30),
+            'descripcion' => str_random(225) ,
+        ]);
+        DB::table('Rutas')->insert([
+            'idRuta'=> 4,
+            'nombre' => str_random(30),
+            'descripcion' => str_random(225) ,
+        ]);
+        DB::table('Rutas')->insert([
+            'idRuta'=> 5,
             'nombre' => str_random(30),
             'descripcion' => str_random(225) ,
         ]);
