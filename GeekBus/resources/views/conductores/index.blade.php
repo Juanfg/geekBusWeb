@@ -34,7 +34,7 @@
                   @foreach ($conductores as $conductor)
                     <tr>
                         <td data-title="ID Conductor">{{ $conductor->idConductor }}</td>
-                        <td data-title="Nombre">{{ $conductor->nombre }}</td>
+                        <td data-title="Nombre"><a href="{{ route('choferes.show', [ $conductor->idConductor]) }}">{{ $conductor->nombre }}</a></td>
                         <td data-title="Actividad">
                           @if( $sesion = App\Conductor::activeRoute( $conductor->idConductor ) )
                               Ruta {{ $sesion->camion->ruta->nombre }} Unidad {{ $sesion->camion->unidad }}
