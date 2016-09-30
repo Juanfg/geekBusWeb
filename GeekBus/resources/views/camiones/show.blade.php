@@ -17,6 +17,11 @@
 <p class="text-center"><strong>ID Camion: </strong>{{$camion->idCamion}}</p>
 <p class="text-center"><strong>Latitud: </strong>{{$ubicacion->lat}}</p>
 <p class="text-center"><strong>Longitud: </strong>{{$ubicacion->long}}</p>
+<p class="text-center"><strong>Asientos: </strong>{{$camion->asientos}}</p>
+<p class="text-center"><strong>Capacidad Maxima: </strong>{{$camion->capacidadMaxima}}</p>
+<p class="text-center"><strong>RPM Maxima: </strong>{{$camion->rpmMax}}</p>
+<p class="text-center"><strong>Velocidad Maxima: </strong>{{$camion->velMax}}</p>
+<p class="text-center"><strong>Direccion MAC: </strong>{{$camion->macAddress}}</p>
 <br>
 <div class="col-xs-12">
 	

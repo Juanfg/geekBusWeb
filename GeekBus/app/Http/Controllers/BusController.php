@@ -105,15 +105,22 @@ class BusController extends Controller
             "capacidadMaxima" => "required|numeric",
             "rpmMax" => "required|numeric",
             "velMax" => "required|numeric",
-            "macAdress" => "required|string",
+            "macAddress" => "required|string",
         ]);
 
         $toEdit = Camion::where("idCamion",$id)->firstorfail();
 
-        $toEdit->update($request->all());
+        $alreadyExists = Camion::where("unidad",$request->unidad)->count();
+        if($alreadyExists == 0){
+            $toEdit->update($request->all());
+        }
+        else{
+            $request->session()->flash("message","Ya existe esa unidad");
+            return redirect()->route("autobuses.show",[$id]);
+        }
 
         $request->session()->flash("message","Unidad actualizada con exito");
-        return redirect()->route("camion.show",[$id]);
+        return redirect()->route("autobuses.show",[$id]);
     }
 
     /**
