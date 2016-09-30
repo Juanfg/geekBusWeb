@@ -35,5 +35,17 @@ class SeedParadas extends Seeder
             'lat' => '18.9934' ,
             'long' => '-98.2739',
         ]);
+        DB::table('Paradas')->insert([
+            'idParada'=> 5,
+            'Nombre' => 'Sonata',
+            'lat' => '18.9946' ,
+            'long' => '-98.279',
+        ]);
+        DB::table('Paradas')->insert([
+            'idParada'=> 6,
+            'Nombre' => 'BlvdAsiaentreParquedelaPlatayTerranova',
+            'lat' => '18.9913' ,
+            'long' => '-98.2817',
+        ]);
     }
 }
