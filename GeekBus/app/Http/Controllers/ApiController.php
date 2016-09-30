@@ -34,54 +34,12 @@ class ApiController extends Controller
         $limit = $request->limit;
         $offset = $request->offset;
 
-        /*repuesta 
-        [
-            ::nombre?%s
-            ::id?%d
-            ::salida
-            {
-                ::id?%d
-                ::nombre?%s
-                ::lat?%lf
-                ::long?%lf
-            }
-            ::destino
-            {
-                ::id?%d
-                ::nombre?%s
-                ::lat?%lf
-                ::long?%lf
-            }
-        ]
-        */
         return void;
     }
 
     public function getInfoRuta(Request $request)
     {
         $rutaId = $request;
-
-        /*respuesta 
-            ::nombre?%s
-            ::id?%d
-            ::paradas
-            [
-                {
-                    ::nombre?%s
-                    ::id?%d
-                    ::lat?%lf
-                    ::long?%lf
-                    ::autobus
-                    {
-                        ::id?%d
-                        ::tiempo?%datetime
-                        ::numerototal?%d
-                        ::numeroocupado?%d
-                    }
-                }
-            ]
-        */
-
 
         $restult = array();
 
@@ -114,22 +72,6 @@ class ApiController extends Controller
         $limit = $request->limit;
         $offset = $request->offset;
 
-        /*Respuesta
-        {
-            [
-                {   
-                    "id" : int,
-                    "nombre": string,
-                    "lat": double,
-                    "lon": double
-                },   …
-            ]
-        }
-        */
-
-
-        // $respuesta = json_encode($assoc);
-
         return void; 
     }
 
@@ -137,44 +79,6 @@ class ApiController extends Controller
     {
         $paradaId = $request;
 
-        /*
-        Respuesta
-        {
-            "id" : int,
-            "nombre": string,
-            "lat": double,
-            "lon": double
-            "autobuses":
-            [
-                {
-                    "id": int,
-                    “nombre” : string,
-                    "tiempo": datetime,
-                    "numerototal": int,
-                    "numeroocupado": int
-                    "ruta":
-                    {
-                        “nombre” : string,
-                        “id” : int,
-                        “salida” : 
-                        {   
-                            "id" : int,
-                            "nombre": string,
-                            "lat": double,
-                            "lon": double
-                        },
-                        “destino”: 
-                        {   
-                            "id" : int,
-                            "nombre": string,
-                            "lat": double,
-                            "lon": double
-                        }   
-                    }
-                },   …
-            ]
-        }
-        */
         $restult = array();
 
         $books = DB::table('ParadaCamiones')->where('ParadaCamiones.idRuta','=', $paradaId)->join('Paradas','Paradas.idParada','=','ParadaCamiones.idParada')->select('Paradas.idParada', 'Paradas.Nombre', 'Paradas.lat', 'Paradas.long')->get();
@@ -186,7 +90,6 @@ class ApiController extends Controller
                 $valuec->tiempo = $valuec->dis/666.6667;
             }
         }
-        
 
         return json_encode($books);
     }
@@ -213,43 +116,19 @@ class ApiController extends Controller
         $lon = -98.232665;
         $limit = 3;
         $offset = 0;
-        
-        /*Respuesta
-        {
-            [
-                {                       
-                    "idParada" : int,
-                    "nombre": string,
-                    "lat": double,
-                    "lon": double
-                    "rutas": [
-                        {
-                            "idRuta": int,
-                            "nombre": string,
-                            "salida": string,
-                            "destino": string
-                        },...
-                    ]
-                }, ...
-            ]
-        }
-        */
+
         $restult = array();
 
         $books = DB::table('Paradas')->select(DB::raw('*,distlatlon(Paradas.lat, Paradas.long, '.$lat.','.$lon.') as dis'))->orderby('dis', 'asc')->limit($limit)->offset($offset)->get();
 
         foreach ($books as $key => $value) {
-            $dist = DB::table('ParadaCamiones')->where('ParadaCamiones.idParada','=', $value->idParada)->join('Rutas','Rutas.idRuta','=','ParadaCamiones.idRuta')->select('*')->get();
-            $value->tiempo = $value->dis/666.6667;
-            $value->rutas = $dist;
-            // foreach($dist as $key => $valuec){
-            //     $camion = DB::table('Rutas')->where([['Rutas.idRuta', '=', $valuec->idRuta], ['Eventos.idTipoEvento','=', 7]])->leftJoin('Camiones','Camiones.idRuta','=','Rutas.idRuta')->join('Eventos','Eventos.idCamion','=','Camiones.idCamion')->join('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select('Camiones.idCamion', 'Eventos.idTipoEvento')->select(DB::raw('Camiones.idRuta, Rutas.nombre,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->distinct()->orderBy('Eventos.fechahora', 'asc')->get();
-            //     foreach ($camion as $key => $valueg){
-            //         $valueg->tiempo = $valueg->dis/666.666;
-            //     }
-            //}
+            $rutas = DB::table('ParadaCamiones')->where([['ParadaCamiones.idParada','=', $value->idParada], ['Eventos.idTipoEvento','=', 7]])->join('Rutas','Rutas.idRuta','=','Rutas.idRuta')->leftJoin('Camiones','Camiones.idRuta','=','Rutas.idRuta')->join('Eventos','Eventos.idCamion','=','Camiones.idCamion')->join('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select('Camiones.idCamion', 'Eventos.idTipoEvento')->select(DB::raw('Camiones.idRuta, Rutas.nombre,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->distinct()->orderBy('Eventos.fechahora', 'asc')->get();
+            $value->tiempo = $value->dis/66.6667;
+            $value->rutas = $rutas;
+            foreach ($rutas as $key => $valuec){
+                $valuec->tiempo = $valuec->dis/666.6667;
+            }
         }
-
         return json_encode($books);
     }
 }
