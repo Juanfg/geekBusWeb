@@ -31,22 +31,41 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                      <td data-title="ID Conductor">AAC</td>
-                      <td data-title="Nombre">AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
-                      <td data-title="Actividad">AAC</td>
-                      <td data-title="Acciones">
-          	              <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                      </td>
-                  </tr>
+                  @foreach ($conductores as $conductor)
+                    <tr>
+                        <td data-title="ID Conductor">{{ $conductor->idConductor }}</td>
+                        <td data-title="Nombre">{{ $conductor->nombre }}</td>
+                        <td data-title="Actividad">
+                          @if( $sesion = App\Conductor::activeRoute( $conductor->idConductor ) )
+                              Ruta {{ $sesion->camion->ruta->nombre }} Unidad {{ $sesion->camion->unidad }}
+                          @else
+                              No
+                          @endif
+                        </td>
+                        <td data-title="Acciones">
+                            <div class="col-xs-2 col-xs-offset-3">
+                              {!! Form::open( [ 'method' => 'GET', 'route'=>['choferes.edit', $conductor->idConductor]]) !!}
+                              <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                              {!! Form::close() !!}
+                            </div>
+                            <div class="col-xs-2">
+                              {!! Form::open( [ 'method' => 'DELETE', 'route'=>['choferes.destroy', $conductor->idConductor]]) !!}
+                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                              {!! Form::close() !!}
+                            </div>
+                        </td>
+                    </tr>          
+                  @endforeach
+                  
                   </tbody>
               </table>
           </section>
       </div><!-- /content-panel -->
       	<br>
       	<div align="right">
-			<button type="button" class="btn btn-success">Agregar Chofer</button>
+        {!! Form::open( [ 'method' => 'GET', 'route' =>['choferes.create']]) !!}
+        {!! Form::submit('Crear conductor', ['class' => 'btn btn-success']) !!}
+        {!! Form::close() !!}
 		</div>
   </div><!-- /col-lg-12 -->
 

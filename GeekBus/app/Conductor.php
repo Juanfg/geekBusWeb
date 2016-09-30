@@ -21,4 +21,8 @@ class Conductor extends Model
     {
         return $this->hasMany('App\Evento', 'idEvento');
     }
+
+    static public function activeRoute($id){
+        return Ronda::where('idConductor', $id)->where('salida', null)->first();
+    }
 }
