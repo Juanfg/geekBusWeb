@@ -13,28 +13,28 @@ class SeedRutas extends Seeder
     {
         DB::table('Rutas')->insert([
             'idRuta'=> 1,
-            'nombre' => str_random(30),
-            'descripcion' => str_random(225) ,
+            'nombre' => "Ruta 45",
+            'descripcion' => "Ruta que pasa por Atlixcayotl",
         ]);
         DB::table('Rutas')->insert([
             'idRuta'=> 2,
-            'nombre' => str_random(30),
-            'descripcion' => str_random(225) ,
+            'nombre' => "Movi Lomas 2",
+            'descripcion' => "Segunda ruta de Lomas",
         ]);
         DB::table('Rutas')->insert([
        	    'idRuta'=> 3,
-            'nombre' => str_random(30),
-            'descripcion' => str_random(225) ,
+            'nombre' => "Movi Lomas 1",
+            'descripcion' => "Primera ruta de Lomas",
         ]);
         DB::table('Rutas')->insert([
             'idRuta'=> 4,
-            'nombre' => str_random(30),
-            'descripcion' => str_random(225) ,
+            'nombre' => "Ruta Europa",
+            'descripcion' => "Ruta que pasa por Sonata",
         ]);
         DB::table('Rutas')->insert([
             'idRuta'=> 5,
-            'nombre' => str_random(30),
-            'descripcion' => str_random(225) ,
+            'nombre' => "Ruta Boulevard",
+            'descripcion' => "Ruta que pasa por uni Inter",
         ]);
     }
 }

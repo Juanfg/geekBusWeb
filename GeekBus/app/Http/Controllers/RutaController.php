@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Ruta;
 use App\ParadaCamion;
+use App\Parada;
 
 class RutaController extends Controller
 {
@@ -67,7 +68,8 @@ class RutaController extends Controller
     {
         $ruta = Ruta::where('idRuta', $id)->firstOrFail();
         $paradas = Ruta::find(2)->paradas;
-        return view('rutas.show', ['ruta' => $ruta, "paradas"=>$paradas]);
+        $paradaCamion = ParadaCamion::where("idRuta",$id)->firstorfail();
+        return view('rutas.show', ['ruta' => $ruta, 'paradaCamion' => $paradaCamion, "paradas"=>$paradas]);
     }
 
     /**
@@ -123,5 +125,26 @@ class RutaController extends Controller
         }
 
         return redirect()->route("rutas.index");
+    }
+
+    public function paradaCreate(Request $request, $id)
+    {
+        return view('route.createroute');
+    }
+
+    public function paradaStore(Request $request, $id)
+    {
+        Ruta::where("idRuta",$id)->findorfail();
+        Parada::where("idParada",$request->idParada)->findorfail();
+        $alreadyExists = ParadaCamion::where("idParada",$request->idParada)->count();
+        if($alreadyExists == 0){
+            ParadaCamion::create(["idRuta"=>$id,"idParada"=>$request->idParada,"numParada"=>Parada::all()->count()+1]);
+        }else{
+            $request->session()->flash("error","Ya existe esa parada en esta ruta");
+            return back()->withInput();
+        }
+
+        $request->session()->flash("message","Parada asignda con exito");
+        return redirect()->route("route.create");
     }
 }

@@ -16,6 +16,9 @@ Route::group(['middleware'=>'auth'], function(){
 
 	Route::get('/', 'HomeController@dashboard')->name('/');
 
+	Route::get('rutas/{id}/create', 'RutaController@paradaCreate');
+	Route::post('rutas/{id}/create', 'RutaController@paradaStore')->name('rutaparda');
+
 	Route::get('/home',function(){
 
 		return redirect()->route('/');
@@ -28,6 +31,8 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::resource('rutas', 'RutaController');
 
 	Route::resource('paradas', 'ParadaController');
+
+	Route::resource('admins', 'AdminController');
 
 	Route::get('rondas', 'RondaController');
 
