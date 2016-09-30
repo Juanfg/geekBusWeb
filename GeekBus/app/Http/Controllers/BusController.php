@@ -84,7 +84,7 @@ class BusController extends Controller
     public function edit($id)
     {
         $toEdit = Camion::where("idCamion",$id)->firstorfail();
-        return view("camiones.edit",["camion"=>$toEdit]);
+        return view("camiones.editar",["camion"=>$toEdit]);
     }
 
     /**
@@ -119,8 +119,18 @@ class BusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $bus = Camion::where("idCamion", $id)->firstorfail();
+        $deleted = $bus->delete();
+
+        if($deleted){
+            $request->session()->flash("deleted","Eliminado con &eacute;xito");
+        }
+        else{
+            $request->session()->flash("failDeleted", "Algo sali&oacute; mal. Por favor contacta a desarrador.");
+        }
+
+        return redirect()->route("autobuses.index");
     }
 }

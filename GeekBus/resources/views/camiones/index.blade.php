@@ -47,6 +47,7 @@
                       <td data-title="MAC Address">{{ $camion->macAddress }}</td>
                       <td data-title="Accion">
                             <div class="col-xs-2 col-xs-offset-3">
+                              {!! Form::open( [ 'method' => 'GET', 'route'=>['autobuses.edit', $camion->idCamion]]) !!}
                               <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                               {!! Form::close() !!}
                             </div>
