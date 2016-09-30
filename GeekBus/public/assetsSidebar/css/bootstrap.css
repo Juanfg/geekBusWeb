@@ -186,6 +186,9 @@ table {
 td,
 th {
   padding: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 0;
 }
 @media print {
   * {
