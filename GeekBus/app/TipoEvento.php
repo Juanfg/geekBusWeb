@@ -26,4 +26,25 @@ class TipoEvento extends Model
     static $temperatura = 5;
     static $velocidad = 6;
     static $parada = 7;
+
+    static function incidentDescription($id){
+        switch ($id) {
+            case 1:
+                return "se encendi&oacute;";
+            case 2:
+                return "se apago";
+            case 3:
+                return "rebaso el limite de rpm";
+            case 4:
+                return "rebaso el limite de pasajeros";
+            case 5:
+                return "rebaso el limite de temperatura";
+            case 6:
+                return "rebaso el limite de velocidad";
+            case 7:
+                return "registro una parada";
+            default:
+        return "";
+        }
+    }
 }

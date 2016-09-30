@@ -15,6 +15,13 @@
 </div>
 <h1 class="text-center">{{$conductor->nombre}}</h1>
 <p class="text-center"><strong>Llave de logueo: </strong>{{$conductor->loginKey}}</p>
+<p class="text-center">
+	@if( $sesion = App\Conductor::activeRoute( $conductor->idConductor ) )
+	    Conduciendo Ruta {{ $sesion->camion->ruta->nombre }} Unidad {{ $sesion->camion->unidad }}
+	@else
+	    No esta manejando en este momento
+	@endif
+</p>
 <br>
 <div class="col-xs-12">
 	

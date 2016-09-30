@@ -30,10 +30,17 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::resource('paradas', 'ParadaController');
 
 	Route::get('rondas', 'RondaController');
+
+	Route::get('logout', function(){
+		Auth::logout();
+		return redirect()->route('/');
+	})->name('logout');
 });
+
 
 Auth::routes();
 
 Route::get('test',function(){
 	return view('paradas.index');
 });
+

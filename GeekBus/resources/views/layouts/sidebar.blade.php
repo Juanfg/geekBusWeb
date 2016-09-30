@@ -1,3 +1,6 @@
+<?php  $notificaciones = DB::table('Incidencias')->orderBy('idIncidencia', 'desc')->limit(5)->join('Eventos','Eventos.idEvento', 'Incidencias.idEvento')->join('Conductores','Conductores.idConductor','Eventos.conductor')->get(); ?>
+<?php $activeUsers = DB::table('Rondas')->where('salida',null)->join('conductores', 'Conductores.idConductor','Rondas.idConductor')->join('Camiones','Camiones.idCamion','Rondas.idCamion')->join('Rutas', 'Rutas.idRuta','Camiones.idRuta')->select('Conductores.nombre', 'fotoPath', 'Rutas.nombre as ruta','Conductores.idConductor')->get(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,108 +12,96 @@
 
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
-    <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/bootstrap.css') }}">     <!--external css--> 
-<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/font-awesome/css/font-awesome.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/zabuto_calendar.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/js/gritter/css/jquery.gritter.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assetsSidebar/lineicons/style.css') }}">
-
-    
+  <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/font-awesome/css/font-awesome.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/zabuto_calendar.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/js/gritter/css/jquery.gritter.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/lineicons/style.css') }}">    
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/style.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assetsSidebar/css/style-responsive.css') }}">
-
     <script src="assetsSidebar/js/chart-master/Chart.js"></script>
-    
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
 
   <section id="container" >
-      <!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
-      <!--header start-->
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="index.html" class="logo"><b>GEEKBUS</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <!--  notification end -->
-            </div>
-            <div class="top-menu">
-              <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login.html">Logout</a></li>
-              </ul>
-            </div>
-        </header>
-      <!--header end-->
-      
-      <!-- **********************************************************************************************************************************************************
-      MAIN SIDEBAR MENU
-      *********************************************************************************************************************************************************** -->
-      <!--sidebar start-->
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+        </div>
+        <a href={{ route('/') }} class="logo"><b>GEEKBUS</b></a>
+        
+        <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <li><a class="logout" href="{{route('logout')}}">Logout</a></li>
+        </ul>
+      </div>
+      </header>
+    
       <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
-              
-                  <p class="centered"><a href="profile.html"><img src="assetsSidebar/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-                  <h5 class="centered">Marcel Newman</h5>
+        <div id="sidebar"  class="nav-collapse ">
+          <ul class="sidebar-menu" id="nav-accordion">
+            <p class="centered"><a href="#"><img src="{{asset('assetsSidebar/img/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
+            <h5 class="centered">{{Auth::user()->name}}</h5>
                     
                   <li class="mt">
-                      <a class="active" href="index.html">
+                      <a href="{{route('/')}}">
                           <i class="fa fa-dashboard"></i>
                           <span>Inicio</span>
                       </a>
                   </li>
 
                   <li class="mt">
-                      <a href="index.html">
-                          <i class="fa fa-dashboard"></i>
+                      <a href="{{route('autobuses.index')}}">
+                          <i class="fa fa-dashboard" ></i>
                           <span>Camiones</span>
                       </a>
                   </li>
 
                   <li class="mt">
-                      <a href="index.html">
+                      <a href="{{route('choferes.index')}}">
                           <i class="fa fa-dashboard"></i>
                           <span>Choferes</span>
                       </a>
                   </li>
 
                   <li class="mt">
-                      <a href="index.html">
+                      <a href="{{route('rutas.index')}}">
                           <i class="fa fa-dashboard"></i>
                           <span>Rutas</span>
                       </a>
                   </li>
 
                   <li class="mt">
-                      <a href="index.html">
+                      <a href="{{route('paradas.index')}}">
                           <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
+                          <span>Paradas</span>
+                      </a>
+                  </li>
+                  <li class="mt">
+                      <a href="#">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Administradores</span>
+                      </a>
+                  </li>
+                   <li class="mt">
+                      <a href="#">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Estad&iacute;sticas</span>
+                      </a>
+                  </li>
+                  <li class="mt">
+                      <a href="#">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Incidencias</span>
                       </a>
                   </li>
               </ul>
               <!-- sidebar menu end-->
           </div>
       </aside>
-      <!--sidebar end-->
-      
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
+  
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
@@ -118,131 +109,36 @@
               <div class="row">
                   <div class="col-lg-9 col-xs-12 main-chart">
                   @yield('content')
-                  </div><!-- /col-lg-9 END SECTION MIDDLE -->
-                  
-                  
-      <!-- **********************************************************************************************************************************************************
-      RIGHT SIDEBAR CONTENT
-      *********************************************************************************************************************************************************** -->                  
+                  </div>  
                   
                   <div class="col-lg-3 hidden-sm hidden-xs hidden-md ds">
-                    <!--COMPLETED ACTIONS DONUTS CHART-->
                     <h3>NOTIFICACIONES</h3>
-                                        
-                      <!-- First Action -->
-                      <div class="desc">
+                      @foreach ($notificaciones as $notificacion)
+                        <div class="desc">
                         <div class="thumb">
                           <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                         </div>
                         <div class="details">
-                          <p><muted>2 Minutes Ago</muted><br/>
-                             <a href="#">James Brown</a> subscribed to your newsletter.<br/>
+                          <p><muted>{{$notificacion->fechahora}}</muted><br/>
+                             <a href="#">{{$notificacion->nombre}} {{App\TipoEvento::incidentDescription($notificacion->idTipoEvento)}}</a><br/>
                           </p>
                         </div>
                       </div>
-                      <!-- Second Action -->
+                      @endforeach            
+  
+                      <h3>CHOFERES ACTIVOS</h3>
+                      @foreach ($activeUsers as $user)
                       <div class="desc">
                         <div class="thumb">
-                          <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                          <img class="img-circle" src="{{Storage::url($user->fotoPath)}}" width="35px" height="35px" align="">
                         </div>
                         <div class="details">
-                          <p><muted>3 Hours Ago</muted><br/>
-                             <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
+                          <p><a href="{{route('choferes.show',[$user->idConductor])}}">{{$user->nombre}}</a><br/>
+                             <muted>Ruta {{ $user->ruta }}</muted>
                           </p>
                         </div>
                       </div>
-                      <!-- Third Action -->
-                      <div class="desc">
-                        <div class="thumb">
-                          <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                        </div>
-                        <div class="details">
-                          <p><muted>7 Hours Ago</muted><br/>
-                             <a href="#">Brandon Page</a> purchased a year subscription.<br/>
-                          </p>
-                        </div>
-                      </div>
-                      <!-- Fourth Action -->
-                      <div class="desc">
-                        <div class="thumb">
-                          <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                        </div>
-                        <div class="details">
-                          <p><muted>11 Hours Ago</muted><br/>
-                             <a href="#">Mark Twain</a> commented your post.<br/>
-                          </p>
-                        </div>
-                      </div>
-                      <!-- Fifth Action -->
-                      <div class="desc">
-                        <div class="thumb">
-                          <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                        </div>
-                        <div class="details">
-                          <p><muted>18 Hours Ago</muted><br/>
-                             <a href="#">Daniel Pratt</a> purchased a wallet in your store.<br/>
-                          </p>
-                        </div>
-                      </div>
-
-                       <!-- USERS ONLINE SECTION -->
-            <h3>CHOFERES ACTIVOSS</h3>
-                      <!-- First Member -->
-                      <div class="desc">
-                        <div class="thumb">
-                          <img class="img-circle" src="assetsSidebar/img/ui-divya.jpg" width="35px" height="35px" align="">
-                        </div>
-                        <div class="details">
-                          <p><a href="#">DIVYA MANIAN</a><br/>
-                             <muted>Available</muted>
-                          </p>
-                        </div>
-                      </div>
-                      <!-- Second Member -->
-                      <div class="desc">
-                        <div class="thumb">
-                          <img class="img-circle" src="assetsSidebar/img/ui-sherman.jpg" width="35px" height="35px" align="">
-                        </div>
-                        <div class="details">
-                          <p><a href="#">DJ SHERMAN</a><br/>
-                             <muted>I am Busy</muted>
-                          </p>
-                        </div>
-                      </div>
-                      <!-- Third Member -->
-                      <div class="desc">
-                        <div class="thumb">
-                          <img class="img-circle" src="assetsSidebar/img/ui-danro.jpg" width="35px" height="35px" align="">
-                        </div>
-                        <div class="details">
-                          <p><a href="#">DAN ROGERS</a><br/>
-                             <muted>Available</muted>
-                          </p>
-                        </div>
-                      </div>
-                      <!-- Fourth Member -->
-                      <div class="desc">
-                        <div class="thumb">
-                          <img class="img-circle" src="assetsSidebar/img/ui-zac.jpg" width="35px" height="35px" align="">
-                        </div>
-                        <div class="details">
-                          <p><a href="#">Zac Sniders</a><br/>
-                             <muted>Available</muted>
-                          </p>
-                        </div>
-                      </div>
-                      <!-- Fifth Member -->
-                      <div class="desc">
-                        <div class="thumb">
-                          <img class="img-circle" src="assetsSidebar/img/ui-sam.jpg" width="35px" height="35px" align="">
-                        </div>
-                        <div class="details">
-                          <p><a href="#">Marcel Newman</a><br/>
-                             <muted>Available</muted>
-                          </p>
-                        </div>
-                      </div>
-
+                      @endforeach                                  
                       
                   </div><!-- /col-lg-3 -->
               </div>
