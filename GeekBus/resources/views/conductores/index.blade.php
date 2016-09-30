@@ -3,6 +3,18 @@
 @section('title', 'Conductores')
 
 @section('content')
+
+@if (session('deleted'))
+    <div class="alert alert-warning">
+        {{ session('deleted') }}
+    </div>
+@endif
+@if (session('failDeleted'))
+    <div class="alert alert-danger">
+        {{ session('failDeleted') }}
+    </div>
+@endif
+
 <div class="col-lg-12">
   <h2> Choferes </h2>
   <p> En esta secci&oacute;n podr&aacute;s agregar, modificar la informaci&oacute;n, y eliminar a los choferes de la base de datos</p>

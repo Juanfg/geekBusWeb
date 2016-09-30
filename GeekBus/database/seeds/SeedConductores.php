@@ -20,7 +20,7 @@ class SeedConductores extends Seeder
         DB::table('Conductores')->insert([
             'idConductor' => 6,
             'nombre' => 'JP',
-            'fotoPath' => 'images/8beac075961f78b3eba33f4889c6a2ce.jpeg',
+            'fotoPath' => 'public/8beac075961f78b3eba33f4889c6a2ce.jpeg',
             'loginKey' => '12345',
         ]);
         DB::table('Conductores')->insert([
