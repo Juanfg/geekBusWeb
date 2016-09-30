@@ -29,6 +29,8 @@ Route::group(['middleware'=>'auth'], function(){
 
 	Route::resource('paradas', 'ParadaController');
 
+	Route::resource('admins', 'AdminController');
+
 	Route::get('rondas', 'RondaController');
 
 	Route::get('incidencias', 'IncidenciasController@index')->name('incidencias.index');
