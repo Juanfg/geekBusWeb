@@ -67,13 +67,8 @@ class RutaController extends Controller
     public function show($id)
     {
         $ruta = Ruta::where('idRuta', $id)->firstOrFail();
-<<<<<<< Updated upstream
         $paradas = Ruta::find(2)->paradas;
-        $paradaCamion = ParadaCamion::where("idRuta",$id)->firstorfail();
-        return view('rutas.show', ['ruta' => $ruta, 'paradaCamion' => $paradaCamion, "paradas"=>$paradas]);
-=======
-        return view('rutas.show', ['ruta' => $ruta]);
->>>>>>> Stashed changes
+        return view('rutas.show', ['ruta' => $ruta, "paradas"=>$paradas]);
     }
 
     /**
