@@ -132,8 +132,18 @@ class ChoferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+            $conductor = Conductor::where('idConductor' , $id)->firstOrFail();
+            $deleted = $conductor->delete();
+
+            if($deleted){
+               $request->session()->flash("deleted", "Eliminado con &eacute;xito");
+            }
+            else{
+                $request->session()->flash("failDeleted", "Algo sali&oacute; mal. Por favor contacta a desarrollo.");
+            }
+
+            return redirect()->route("choferes.index");
     }
 }
