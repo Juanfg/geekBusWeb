@@ -16,7 +16,7 @@ class RutaController extends Controller
      */
     public function index()
     {
-        return view("rutas.index");
+        return view("rutas.index", ['rutas'=>Ruta::all()]);
     }
 
     /**
@@ -108,8 +108,18 @@ class RutaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $ruta = Ruta::where('idRuta' , $id)->firstOrFail();
+        $deleted = $ruta->delete();
+
+        if($deleted){
+            $request->session()->flash("deleted", "Eliminada con &eacute;xito");
+        }
+        else{
+            $request->session()->flash("failDeleted", "Algo sali&oacute; mal. Por favor contacta a desarrollo.");
+        }
+
+        return redirect()->route("rutas.index");
     }
 }
