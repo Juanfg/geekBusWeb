@@ -243,8 +243,11 @@ class ApiController extends Controller
             $value->tiempo = $value->dis/666.6667;
             $value->rutas = $dist;
             // foreach($dist as $key => $valuec){
-            //     $camion = DB::table('Rutas')->where('Rutas.idRuta', '=', $valuec->idRuta)->join('Camiones','Camiones.idRuta','=','Rutas.idRuta')->leftJoin('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select(DB::raw('Camiones.idCamion,Camiones.idRuta, Rutas.nombre,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->
-            // }
+            //     $camion = DB::table('Rutas')->where([['Rutas.idRuta', '=', $valuec->idRuta], ['Eventos.idTipoEvento','=', 7]])->leftJoin('Camiones','Camiones.idRuta','=','Rutas.idRuta')->join('Eventos','Eventos.idCamion','=','Camiones.idCamion')->join('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select('Camiones.idCamion', 'Eventos.idTipoEvento')->select(DB::raw('Camiones.idRuta, Rutas.nombre,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->distinct()->orderBy('Eventos.fechahora', 'asc')->get();
+            //     foreach ($camion as $key => $valueg){
+            //         $valueg->tiempo = $valueg->dis/666.666;
+            //     }
+            //}
         }
 
         return json_encode($books);

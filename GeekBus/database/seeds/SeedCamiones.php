@@ -19,7 +19,7 @@ class SeedCamiones extends Seeder
             'capacidadMaxima' => 24,
             'rpmMax' => rand(1,7000),
             'velMax' => rand(1,80),
-            'macAddress' => str_random(254),
+            'macAddress' => str_random(25),
         ]);
         DB::table('Camiones')->insert([
         	'idCamion' => 2,
@@ -29,7 +29,7 @@ class SeedCamiones extends Seeder
             'capacidadMaxima' => 45,
             'rpmMax' => rand(1,7000),
             'velMax' => rand(1,80),
-            'macAddress' => "RKYjcZWezDBoed2j0LbuwAIyJqjTkVe7ObtXt77C4",
+            'macAddress' => "RKYjcZWezDB",
         ]);
         DB::table('Camiones')->insert([
             'idCamion' => 3,
@@ -49,7 +49,7 @@ class SeedCamiones extends Seeder
             'capacidadMaxima' => 24,
             'rpmMax' => rand(1,7000),
             'velMax' => rand(1,80),
-            'macAddress' => str_random(254),
+            'macAddress' => str_random(25),
         ]);
     }
 }
