@@ -112,14 +112,9 @@ class ApiController extends Controller
         $limit = $request->limit;
         $offset = $request->offset;
 
-        $lat = 19.028503;
-        $lon = -98.232665;
-        $limit = 3;
-        $offset = 0;
-
         $restult = array();
 
-        $books = DB::table('Paradas')->select(DB::raw('*,distlatlon(Paradas.lat, Paradas.long, '.$lat.','.$lon.') as dis'))->orderby('dis', 'asc')->limit($limit)->offset($offset)->get();
+        $books = DB::table('Paradas')->select(DB::raw('Paradas.idParada, Paradas.nombre, Paradas.lat, Paradas.long ,distlatlon(Paradas.lat, Paradas.long, '.$lat.','.$long.') as dis'))->orderby('dis', 'asc')->limit($limit)->offset($offset)->get();
 
         foreach ($books as $key => $value) {
             $rutas = DB::table('ParadaCamiones')->where([['ParadaCamiones.idParada','=', $value->idParada], ['Eventos.idTipoEvento','=', 7]])->join('Rutas','Rutas.idRuta','=','Rutas.idRuta')->leftJoin('Camiones','Camiones.idRuta','=','Rutas.idRuta')->join('Eventos','Eventos.idCamion','=','Camiones.idCamion')->join('Ubicaciones','Ubicaciones.idCamion','=','Camiones.idCamion')->select('Camiones.idCamion', 'Eventos.idTipoEvento')->select(DB::raw('Camiones.idRuta, Rutas.nombre,distlatlon('.$value->lat.', '.$value->long.', Ubicaciones.lat,Ubicaciones.long) as dis'))->distinct()->orderBy('Eventos.fechahora', 'asc')->get();
