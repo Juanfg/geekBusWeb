@@ -25,9 +25,15 @@ class SeedParadas extends Seeder
         ]);
         DB::table('Paradas')->insert([
             'idParada'=> 3,
-            'Nombre' => 'Cluster 122',
-            'lat' => '18.9983' ,
-            'long' => '-98.2631',
+            'Nombre' => 'Cluster 121212',
+            'lat' => '19.0023' ,
+            'long' => '-98.2687',
+        ]);
+        DB::table('Paradas')->insert([
+            'idParada'=> 4,
+            'Nombre' => 'Universidad',
+            'lat' => '18.9934' ,
+            'long' => '-98.2739',
         ]);
     }
 }
