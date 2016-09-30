@@ -19,7 +19,7 @@ class AdminController extends Controller
         return view('admin.index', ['admin'=>User::all()]);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $number = User::all()->count();
 
