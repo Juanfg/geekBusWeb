@@ -1,6 +1,6 @@
 @extends('layouts.sidebar')
 
-@section('title', 'Conductores')
+@section('title', 'Camiones')
 
 @section('content')
 
@@ -27,10 +27,10 @@
 
 
 <div class="col-sm-12"> 
-<h2> Crear conductor </h2>
-<h3> Aqu&iacute; podr&aacute;s crear a un conductor. <br> La llave de acceso es la llave que tendr&aacute;s que dar a tu conductor para que inicie sesi&oacute;n </h3>
+<h2> A&ntilde;adir cami&oacute;n </h2>
+<h3> Aqu&iacute; podr&aacute;s a&ntilde; un cami&oacute;n a la base de datos. <br> Procura que todos los datos se inserten de manera correcta para futuras referencias. Podr&aacute;s editar m&aacute;s tarde</h3>
 <br>
-{!! Form::model(new App\Conductor, ['route' =>'choferes.store', 'files' => 'true' ]) !!}
-@include('conductores.form', ['submit_text' => 'Crear'])
+{!! Form::model(new App\Conductor, ['route' =>'autobuses.store', 'files' => 'true' ]) !!}
+@include('camiones.form', ['submit_text' => 'Crear'])
 </div>
 @endsection

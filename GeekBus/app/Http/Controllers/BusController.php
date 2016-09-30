@@ -17,7 +17,7 @@ class BusController extends Controller
      */
     public function index()
     {
-        return view("camiones.index");
+        return view('camiones.index', ['camiones'=>Camion::all()]);
     }
 
     /**
@@ -46,10 +46,10 @@ class BusController extends Controller
             "capacidadMaxima" => "required|numeric",
             "rpmMax" => "required|numeric",
             "velMax" => "required|numeric",
-            "macAdress" => "required|string",
+            "macAddress" => "required|string",
         ]);
 
-        Ruta::where("idRuta",$request->ruta)->firstorfail();
+        Ruta::where("idRuta",$request->idRuta)->firstorfail();
 
         $alreadyExists = Camion::where("unidad",$request->unidad)->count();
         if($alreadyExists == 0){
@@ -60,7 +60,7 @@ class BusController extends Controller
         }
 
         $request->session()->flash("message","Unidad creada y asignada con exito");
-        return redirect()->route("camiones.create");
+        return redirect()->route("autobuses.create");
     }
 
     /**
