@@ -31,16 +31,14 @@ Route::group(['middleware'=>'auth'], function(){
 
 	Route::get('rondas', 'RondaController');
 
+	Route::get('incidencias', 'IncidenciasController@index')->name('incidencias.index');
+	Route::get('incidencias/{id}', 'IncidenciasController@show')->name('incidencias.show');
+	Route::delete('incidencias/{id}', 'IncidenciasController@destroy')->name('incidencias.destroy');
+
 	Route::get('logout', function(){
 		Auth::logout();
 		return redirect()->route('/');
 	})->name('logout');
 });
 
-
 Auth::routes();
-
-Route::get('test',function(){
-	return view('paradas.index');
-});
-

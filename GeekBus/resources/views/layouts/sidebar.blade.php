@@ -92,7 +92,7 @@
                       </a>
                   </li>
                   <li class="mt">
-                      <a href="#">
+                      <a href="{{route('incidencias.index')}}">
                           <i class="fa fa-dashboard"></i>
                           <span>Incidencias</span>
                       </a>

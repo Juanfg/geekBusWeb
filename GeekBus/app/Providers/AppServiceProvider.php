@@ -26,8 +26,10 @@ class AppServiceProvider extends ServiceProvider
 
             if($evento->idTipoEvento == TipoEvento::$rpm)
             {
-                if($evento->valor > $camion->rpmMax)
+                if($evento->valor > $camion->rpmMax){
                     $incident = true;
+                    echo $evento . " " . $camion->rpmMax;
+                }
             }
             else if($evento->idTipoEvento == TipoEvento::$velocidad){
                 if($evento->valor > $camion->velMax)
