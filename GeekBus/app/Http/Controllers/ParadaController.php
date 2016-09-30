@@ -16,7 +16,7 @@ class ParadaController extends Controller
      */
     public function index()
     {
-        return view('paradas.index');
+        return view('paradas.index', ['paradas'=>Parada::all()]);
     }
 
     /**
@@ -56,7 +56,7 @@ class ParadaController extends Controller
         }
 
         $request->session()->flash("message", "Parada creada con exito");
-        return redirect()->route("paradas.create");
+        return redirect()->route("paradas.index");
     }
 
     /**
@@ -112,8 +112,18 @@ class ParadaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $parada = Parada::where('idParada' , $id)->firstOrFail();
+        $deleted = $parada->delete();
+
+        if($deleted){
+            $request->session()->flash("deleted", "Eliminada con &eacute;xito");
+        }
+        else{
+            $request->session()->flash("failDeleted", "Algo sali&oacute; mal. Por favor contacta a desarrollo.");
+        }
+
+        return redirect()->route("paradas.index");
     }
 }

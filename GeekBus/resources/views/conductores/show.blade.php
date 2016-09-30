@@ -14,7 +14,7 @@
     <img src="{{Storage::url($conductor->fotoPath)}}" class="img-responsive col-xs-12 col-sm-4 col-sm-offset-4 img-thumbnail">
 </div>
 <h1 class="text-center">{{$conductor->nombre}}</h1>
-<p class="text-center"><strong>Llave de logueo:</strong>{{$conductor->loginKey}}</p>
+<p class="text-center"><strong>Llave de logueo: </strong>{{$conductor->loginKey}}</p>
 <br>
 <div class="col-xs-12">
 	
