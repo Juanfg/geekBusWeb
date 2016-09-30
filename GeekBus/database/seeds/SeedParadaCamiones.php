@@ -27,7 +27,7 @@ class SeedParadaCamiones extends Seeder
         ]);
         DB::table('ParadaCamiones')->insert([
             'idParadaCamion' => 3, 
-            'idRuta' => 4,
+            'idRuta' => 3,
             'idParada' => 2,
             'numParada' => 8,
         
