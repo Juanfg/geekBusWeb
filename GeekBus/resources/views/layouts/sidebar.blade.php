@@ -120,7 +120,7 @@
                         </div>
                         <div class="details">
                           <p><muted>{{$notificacion->fechahora}}</muted><br/>
-                             <a href="#">{{$notificacion->nombre}} {{App\TipoEvento::incidentDescription($notificacion->idTipoEvento)}}</a><br/>
+                             <a href="{{route('incidencias.show', [$notificacion->idIncidencia])}}">{{$notificacion->nombre}} {{App\TipoEvento::incidentDescription($notificacion->idTipoEvento)}}</a><br/>
                           </p>
                         </div>
                       </div>

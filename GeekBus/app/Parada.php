@@ -16,4 +16,10 @@ class Parada extends Model
     {
         return $this->belongsToMany('App\Ruta', 'ParadaCamiones', 'idParada', 'idRuta');
     }
+
+    public function rutas()
+    {
+    	return $this->belongsToMany('App\Ruta', 'ParadaCamiones', 'idParada', 'idRuta');
+
+    }
 }

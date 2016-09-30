@@ -17,7 +17,7 @@
 <p class="text-center"><strong>Llave de logueo: </strong>{{$conductor->loginKey}}</p>
 <p class="text-center">
 	@if( $sesion = App\Conductor::activeRoute( $conductor->idConductor ) )
-	    Conduciendo Ruta {{ $sesion->camion->ruta->nombre }} Unidad {{ $sesion->camion->unidad }}
+	    Conduciendo Ruta <a href="{{route('rutas.show', [$sesion->camion->ruta->idRuta])}}">{{ $sesion->camion->ruta->nombre }}</a> Unidad <a href="{{route('autobuses.show', [$sesion->camion->idCamion])}}">{{ $sesion->camion->unidad }}</a>
 	@else
 	    No esta manejando en este momento
 	@endif

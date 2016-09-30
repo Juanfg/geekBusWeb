@@ -14,7 +14,7 @@ class SeedConductores extends Seeder
          DB::table('Conductores')->insert([
          	'idConductor' => 5,
             'nombre' => 'Jose',
-            'fotoPath' => 'images/12921b36b8b54bb0ada9ec79e68c3760.png',
+            'fotoPath' => 'public/512eec0b26358aff88d97778bbea35a1.jpeg',
             'loginKey' => '1234',
         ]);
         DB::table('Conductores')->insert([
@@ -26,7 +26,7 @@ class SeedConductores extends Seeder
         DB::table('Conductores')->insert([
             'idConductor' => 1,
             'nombre' => 'Davila',
-            'fotoPath' => 'images/12921b36b8b54bb0ada9ec79e68c3760.png',
+            'fotoPath' => 'public/bb643dd584ae773c76a3e2d90067e2e4.jpeg',
             'loginKey' => 'tSDXu46imTL1Xp37dEFeiph5FxLC19+x2DyIoMgeW8I=',
         ]);
     }

@@ -13,8 +13,18 @@
       html, body { height: 100%; margin: 0; padding: 0; }
       #map { height: 100%; width: 100%;}
 </style>
-<h1 class="text-center">{{$camion->unidad}}</h1>
+<h1 class="text-center">Unidad {{$camion->unidad}}</h1>
+<p class="text-center"><strong>Ruta: </strong><a href="{{route('rutas.show', [ $camion->ruta->idRuta ])}}">{{$camion->ruta->nombre}}</a></p>
 <p class="text-center"><strong>ID Camion: </strong>{{$camion->idCamion}}</p>
+<p class="text-center">
+  <strong>
+    @if(App\Camion::activo($camion->idCamion))
+    Este cami&oacute;n est&aacute; en ruta actualmente
+    @else
+    Este cami&oacute;n no esta haciendo un recorrido
+    @endif
+  </strong> 
+</p>
 <p class="text-center"><strong>Latitud: </strong>{{$ubicacion->lat}}</p>
 <p class="text-center"><strong>Longitud: </strong>{{$ubicacion->long}}</p>
 <p class="text-center"><strong>Asientos: </strong>{{$camion->asientos}}</p>
@@ -54,11 +64,12 @@
 	</div>
 
 </div>
-<div class="col-xs-12">
+
+<div class="col-xs-12 row">
 	<div id="map" style="height:500px;"></div>
 </div>
-<script type="text/javascript">
 
+<script type="text/javascript">
 var map;
 function initMap() {
   var myLatLng =  {lat: {{$ubicacion->lat}}, lng: {{$ubicacion->long}} };

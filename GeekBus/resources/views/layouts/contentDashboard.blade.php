@@ -7,6 +7,7 @@
       #map { height: 100%; width: 100%;}
 </style>
 <div class="col-xs-12">
+    <h1>Ultimas ubicaciones de camiones</h1><br>
     <div id="map" style="height:500px;"></div>
 </div>
 <script type="text/javascript">

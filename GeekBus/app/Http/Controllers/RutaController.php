@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Ruta;
+use App\ParadaCamion;
 
 class RutaController extends Controller
 {
@@ -65,7 +66,8 @@ class RutaController extends Controller
     public function show($id)
     {
         $ruta = Ruta::where('idRuta', $id)->firstOrFail();
-        return view('rutas.show', ['ruta' => $ruta]);
+        $paradas = Ruta::find(2)->paradas;
+        return view('rutas.show', ['ruta' => $ruta, "paradas"=>$paradas]);
     }
 
     /**

@@ -13,6 +13,36 @@
 <h1 class="text-center">{{$ruta->nombre}}</h1>
 <p class="text-center"><strong>ID Ruta: </strong>{{$ruta->idRuta}}</p>
 <p class="text-center"><strong>Descripci&oacute;n: </strong>{{$ruta->descripcion}}</p>
+
+<div class="col-xs-12"></div>
+	<h2>Paradas</h2>
+	<div class="content-panel">
+	  <h4><i class="fa fa-angle-right"></i> Incidencias similares del mismo conductor</h4>
+	  <section id="no-more-tables">
+	      <table class="table table-bordered table-striped table-condensed cf">
+	          <thead class="cf">
+	          <tr>
+	              <th>Parada</th>
+	              <th>Opciones</th>
+	          </tr>
+	          </thead>
+	          <tbody>
+
+	          @foreach ($paradas as $parada)
+	          <tr>
+	              <td data-title="Ruta"><a href="{{route('paradas.show',[$parada->idParada])}}">{{ $parada->nombre }}</td>
+	              <td data-title="Unidad" class="text-center">
+	              	
+	              	{!! Form::submit('Eliminar parada', ['class' => 'btn btn-danger']) !!}
+					{!! Form::close() !!}
+
+	              </td>
+	          </tr>
+	          @endforeach
+	          </tbody>
+	      </table>
+	  </section>
+	</div><!-- /content-panel -->
 <br>
 <div class="col-xs-12">
 	

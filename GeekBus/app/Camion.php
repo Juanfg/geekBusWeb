@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Ronda;
 
 class Camion extends Model
 {
@@ -38,5 +39,9 @@ class Camion extends Model
     public function ruta()
     {
         return $this->belongsTo('App\Ruta', 'idRuta');
+    }
+
+    public static function activo($id){
+        return Ronda::where('idCamion', $id)->where('salida', null)->count() != 0;
     }
 }
