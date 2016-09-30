@@ -32,17 +32,17 @@ class TipoEvento extends Model
             case 1:
                 return "se encendi&oacute;";
             case 2:
-                return "se apago";
+                return "se apag&oacute;";
             case 3:
-                return "rebaso el limite de rpm";
+                return "rebas&oacute; el limite de rpm";
             case 4:
-                return "rebaso el limite de pasajeros";
+                return "rebas&oacute; el limite de pasajeros";
             case 5:
-                return "rebaso el limite de temperatura";
+                return "rebas&oacute; el limite de temperatura";
             case 6:
-                return "rebaso el limite de velocidad";
+                return "rebas&oacute; el limite de velocidad";
             case 7:
-                return "registro una parada";
+                return "registr&oacute; una parada";
             default:
         return "";
         }

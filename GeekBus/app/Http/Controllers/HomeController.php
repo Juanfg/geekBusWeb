@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,14 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('layouts.contentDashboard');;
+        $camionesFecha = DB::select(DB::raw("select idCamion, max(fechahora) as fechahora from `Ubicaciones` group by `idCamion`"));
+
+        $array = [];
+        foreach ($camionesFecha as $buscado){
+
+            $data = DB::table('ubicaciones')->where('fechahora', $buscado->fechahora)->where('Camiones.idCamion', $buscado->idCamion)->join('Camiones', 'Camiones.idCamion', 'Ubicaciones.idCamion')->join('Rutas', 'Rutas.idRuta', 'Camiones.idRuta')->select('Camiones.idCamion as idAutobus', 'lat', 'long', 'Rutas.nombre as nombre', 'Camiones.unidad')->first();
+            array_push($array, $data);
+        }
+        return view('layouts.contentDashboard', ['autobuses' => $array]);;
     }
 }

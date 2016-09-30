@@ -34,6 +34,7 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::get('incidencias', 'IncidenciasController@index')->name('incidencias.index');
 	Route::get('incidencias/{id}', 'IncidenciasController@show')->name('incidencias.show');
 	Route::delete('incidencias/{id}', 'IncidenciasController@destroy')->name('incidencias.destroy');
+	Route::delete('incidencias/{id}/all', 'IncidenciasController@destroyAll')->name('incidencias.destroyAll');
 
 	Route::get('logout', function(){
 		Auth::logout();
