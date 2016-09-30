@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Ruta;
 use App\Camion;
+use App\Ubicacion;
 
 class BusController extends Controller
 {
@@ -72,7 +73,9 @@ class BusController extends Controller
     public function show($id)
     {
         $camion = Camion::where('idCamion',$id)->firstorfail();
-        return view("camiones.show",["camion" => $camion]);
+        $ultimaUbicacion = Ubicacion::where("idCamion",$id)->orderby("fechahora","DESC")->firstorfail();
+
+        return view("camiones.show",["camion" => $camion, "ubicacion" => $ultimaUbicacion]);
     }
 
     /**

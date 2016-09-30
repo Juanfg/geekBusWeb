@@ -40,7 +40,7 @@
                   <tr>
                       <td data-title="ID Camion">{{ $camion->idCamion }}</td>
                       <td data-title="Ruta">{{ $camion->ruta->nombre }}</td>
-                      <td data-title="Unidad">{{ $camion->unidad }}</td>
+                      <td data-title="Unidad"><a href ="{{route('autobuses.show',[$camion->idCamion])}}">{{ $camion->unidad }}</a></td>
                       <td data-title="Asientos">{{ $camion->asientos }}</td>
                       <td data-title="Velocidad">{{ $camion->velMax }}</td>
                       <td data-title="RPM">{{ $camion->rpmMax }}</td>

@@ -28,7 +28,7 @@
 {!! Form::model($camion,
     [
     'method' => 'PUT',
-    'route' =>['autobuses.update', $camion->idParada]
+    'route' =>['autobuses.update', $camion->idCamion]
     ]) !!}
 @include('camiones.form', ['submit_text' => 'Editar'])
 </div>
