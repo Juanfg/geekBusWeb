@@ -67,7 +67,7 @@ class RutaController extends Controller
     public function show($id)
     {
         $ruta = Ruta::where('idRuta', $id)->firstOrFail();
-        $paradas = Ruta::find(2)->paradas;
+        $paradas = DB::table('Rutas')->where('Rutas.idRuta', 2)->join('ParadaCamiones','Rutas.idRuta','ParadaCamiones.idRuta')->join('Paradas','Paradas.idParada','ParadaCamiones.idParada')->orderby('numParada')->get();
         return view('rutas.show', ['ruta' => $ruta, "paradas"=>$paradas]);
     }
 
@@ -128,6 +128,7 @@ class RutaController extends Controller
 
     public function paradaCreate(Request $request, $id)
     {
+        return 'no disponible por el momento';
         return view('route.createroute',["idRuta"=>$id]);
     }
 
@@ -135,13 +136,10 @@ class RutaController extends Controller
     {
         Ruta::where("idRuta",$id)->findorfail();
         Parada::where("idParada",$request->idParada)->findorfail();
-        $alreadyExists = ParadaCamion::where("idParada",$request->idParada)->count();
-        if($alreadyExists == 0){
-            ParadaCamion::create(["idRuta"=>$id,"idParada"=>$request->idParada,"numParada"=>Parada::all()->count()+1]);
-        }else{
-            $request->session()->flash("error","Ya existe esa parada en esta ruta");
-            return back()->withInput();
-        }
+        $numParada = ParadaCamion::where("idParada",1)->max('numParada') +  1;
+
+        ParadaCamion::create(["idRuta"=>$id,"idParada"=>$request->idParada,"numParada"=>$numParada]);
+        
 
         $request->session()->flash("message","Parada asignda con exito");
         return redirect()->route("route.create");
