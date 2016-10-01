@@ -25,8 +25,12 @@
     @endif
   </strong> 
 </p>
+@if($ubicacion)
 <p class="text-center"><strong>Latitud: </strong>{{$ubicacion->lat}}</p>
 <p class="text-center"><strong>Longitud: </strong>{{$ubicacion->long}}</p>
+@else
+<p class="text-center"><strong>Aun no hay informaci&oacute;n de ubicaci&oacute;n</p>
+@endif
 <p class="text-center"><strong>Asientos: </strong>{{$camion->asientos}}</p>
 <p class="text-center"><strong>Capacidad Maxima: </strong>{{$camion->capacidadMaxima}}</p>
 <p class="text-center"><strong>RPM Maxima: </strong>{{$camion->rpmMax}}</p>
@@ -69,6 +73,7 @@
 	<div id="map" style="height:500px;"></div>
 </div>
 
+@if($ubicacion)
 <script type="text/javascript">
 var map;
 function initMap() {
@@ -90,4 +95,5 @@ function initMap() {
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_9PZAZmSz49MCe2lMaWKhd7zq9vy8o7E&callback=initMap">
 </script>
+@endif
 @endsection

@@ -73,7 +73,7 @@ class BusController extends Controller
     public function show($id)
     {
         $camion = Camion::where('idCamion',$id)->firstorfail();
-        $ultimaUbicacion = Ubicacion::where("idCamion",$id)->orderby("fechahora","DESC")->firstorfail();
+        $ultimaUbicacion = Ubicacion::where("idCamion",$id)->orderby("fechahora","DESC")->first();
 
         return view("camiones.show",["camion" => $camion, "ubicacion" => $ultimaUbicacion]);
     }
@@ -138,7 +138,7 @@ class BusController extends Controller
             $request->session()->flash("deleted","Eliminado con &eacute;xito");
         }
         else{
-            $request->session()->flash("failDeleted", "Algo sali&oacute; mal. Por favor contacta a desarrador.");
+            $request->session()->flash("failDeleted", "Algo sali&oacute; mal. Por favor contacta a desarrollo.");
         }
 
         return redirect()->route("autobuses.index");
