@@ -34,7 +34,7 @@ class HomeController extends Controller
         $array = [];
         foreach ($camionesFecha as $buscado){
 
-            $data = DB::table('ubicaciones')->where('fechahora', $buscado->fechahora)->where('Camiones.idCamion', $buscado->idCamion)->join('Camiones', 'Camiones.idCamion', 'Ubicaciones.idCamion')->join('Rutas', 'Rutas.idRuta', 'Camiones.idRuta')->select('Camiones.idCamion as idAutobus', 'lat', 'long', 'Rutas.nombre as nombre', 'Camiones.unidad')->first();
+            $data = DB::table('Ubicaciones')->where('fechahora', $buscado->fechahora)->where('Camiones.idCamion', $buscado->idCamion)->join('Camiones', 'Camiones.idCamion', 'Ubicaciones.idCamion')->join('Rutas', 'Rutas.idRuta', 'Camiones.idRuta')->select('Camiones.idCamion as idAutobus', 'lat', 'long', 'Rutas.nombre as nombre', 'Camiones.unidad')->first();
             array_push($array, $data);
         }
         return view('layouts.contentDashboard', ['autobuses' => $array]);;
