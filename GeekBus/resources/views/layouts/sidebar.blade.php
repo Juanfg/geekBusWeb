@@ -1,5 +1,5 @@
 <?php  $notificaciones = DB::table('Incidencias')->orderBy('idIncidencia', 'desc')->limit(5)->join('Eventos','Eventos.idEvento', 'Incidencias.idEvento')->join('Conductores','Conductores.idConductor','Eventos.conductor')->get(); ?>
-<?php $activeUsers = DB::table('Rondas')->where('salida',null)->join('conductores', 'Conductores.idConductor','Rondas.idConductor')->join('Camiones','Camiones.idCamion','Rondas.idCamion')->join('Rutas', 'Rutas.idRuta','Camiones.idRuta')->select('Conductores.nombre', 'fotoPath', 'Rutas.nombre as ruta','Conductores.idConductor')->get(); ?>
+<?php $activeUsers = DB::table('Rondas')->where('salida',null)->join('Conductores', 'Conductores.idConductor','Rondas.idConductor')->join('Camiones','Camiones.idCamion','Rondas.idCamion')->join('Rutas', 'Rutas.idRuta','Camiones.idRuta')->select('Conductores.nombre', 'fotoPath', 'Rutas.nombre as ruta','Conductores.idConductor')->get(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
